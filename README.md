@@ -1,2 +1,2 @@
 # eportfolio
-ePortfolio Static site
+This repository contains the source code for my personal cybersecurity ePortfolio, hosted using GitHub Pages and connected to a custom domain. It serves as a central location to showcase my professional experience, technical projects, home lab initiatives, certifications, and ongoing learning within the cybersecurity field. The site is continuously updated to reflect my growth, contributions, and commitment to advancing my skills in systems administration and information security.
