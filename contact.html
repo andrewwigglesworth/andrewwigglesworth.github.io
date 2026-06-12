@@ -30,25 +30,41 @@
     </div>
 </main>
     <footer>© 2026 Andrew Wigglesworth</footer>
-        <script>
-  const pageLinks = document.querySelectorAll("a[href$='.html']");
+ <script>
+  const aboutSections = document.querySelectorAll(".about-section");
 
-  pageLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const url = link.getAttribute("href");
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const section = entry.target;
+        const sectionIndex = Number(section.dataset.revealIndex);
 
-      if (!url || link.target === "_blank") {
-        return;
-      }
+        if (entry.isIntersecting) {
+          section.style.transitionDelay = `${Math.min(sectionIndex * 80, 240)}ms`;
+          section.classList.add("is-visible");
 
-      event.preventDefault();
-      document.body.classList.add("page-exit");
-
-      setTimeout(() => {
-        window.location.href = url;
-      }, 250);
+          setTimeout(() => {
+            section.style.transitionDelay = "";
+          }, 700);
+        } else {
+          section.style.transitionDelay = "0ms";
+          section.classList.remove("is-visible");
+        }
+      });
+    }, {
+      threshold: 0.22
     });
-  });
+
+    aboutSections.forEach((section, index) => {
+      section.dataset.revealIndex = index;
+      section.classList.add("reveal-ready");
+      observer.observe(section);
+    });
+  } else {
+    aboutSections.forEach((section) => {
+      section.classList.add("is-visible");
+    });
+  }
 </script>
 </body>
 </html>
