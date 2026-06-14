@@ -1,73 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | Andrew Wigglesworth</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-    <header>
-        <h1>Cyber News & Blog</h1>
-
-        <p>
-            Cybersecurity updates, professional thoughts,
-            and technical writing in one place.
-        </p>
-
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About Me</a>
-            <a href="projects.html">Projects</a>
-            <a href="lab-notes.html">Lab Notes</a>
-            <a href="blog.html">Blog</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
-
-    <main>
-
-        <section class="card">
-            <h2>Cyber News & Updates</h2>
-
-            <p>
-                This page brings together my X feed for quick cybersecurity
-                news and updates, along with my Medium writing for longer
-                posts, reflections, and technical notes.
-            </p>
-        </section>
-
-        <section class="feed-layout">
-
-            <div class="feed-column card">
-                <div class="feed-column-header">
-                    <h2>X Feed</h2>
-                    <p>Short-form cybersecurity updates and reposted news.</p>
-                </div>
-
-                <div class="feed-scroll">
-                    <!--
-                        Replace YOUR_X_HANDLE with your X username.
-                        Example:
-                        href="https://twitter.com/andrewwigglesworth"
-                    -->
-                    <a class="twitter-timeline"
-                       data-theme="dark"
-                       data-height="700"
-                       href="https://twitter.com/YOUR_X_HANDLE">
-                       Posts by YOUR_X_HANDLE
-                    </a>
-                </div>
-            </div>
-
-            <div class="feed-column card">
-                <div class="feed-column-header">
-                    <h2>Medium Blog</h2>
-                    <p>Long-form posts, lessons learned, and technical writing.</p>
-                </div>
-
                 <div class="feed-scroll medium-placeholder">
                     <!--
                         Medium does not provide the same simple official embed
@@ -77,6 +7,9 @@
 
                         Medium RSS format:
                         https://medium.com/feed/@YOUR_MEDIUM_USERNAME
+                Medium RSS format:
+                https://medium.com/feed/@YOUR_MEDIUM_USERNAME
+              -->
 
                         After creating a widget with a service like RSS.app,
                         replace this placeholder block with their iframe.
@@ -95,6 +28,19 @@
                            View Medium Profile
                         </a>
                     </div>
+              <div class="manual-post">
+                <h3>Medium Feed Placeholder</h3>
+                <p>
+                  Replace this block with a Medium RSS widget iframe, or use
+                  these cards to manually feature your latest Medium articles.
+                </p>
+                <a class="btn"
+                   href="https://medium.com/@YOUR_MEDIUM_USERNAME"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                   View Medium Profile
+                </a>
+              </div>
 
                     <div class="manual-post">
                         <h3>Example Blog Post Title</h3>
@@ -104,6 +50,13 @@
                             embedded RSS widget.
                         </p>
                     </div>
+              <div class="manual-post">
+                <h3>Example Blog Post Title</h3>
+                <p>
+                  Add a short summary of one of your Medium articles here. You
+                  can include the topic, date, and why the post matters.
+                </p>
+              </div>
 
                     <div class="manual-post">
                         <h3>Example Blog Post Title</h3>
@@ -113,9 +66,28 @@
                         </p>
                     </div>
                 </div>
+              <div class="manual-post">
+                <h3>Example Blog Post Title</h3>
+                <p>
+                  Add another featured post summary here, or replace this entire
+                  area with an embedded RSS feed widget.
+                </p>
+              </div>
             </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
 
         </section>
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div><h2>Andrew Wigglesworth</h2><p>Cybersecurity updates, technical writing, and professional reflections.</p></div>
+      <div><h3>Pages</h3><div class="footer-links"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a></div></div>
+      <div><h3>Copyright</h3><p>&copy; 2026 Andrew Wigglesworth</p></div>
+    </div>
+  </footer>
 
     </main>
 
@@ -124,5 +96,6 @@
     </footer>
 
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
 </html>
