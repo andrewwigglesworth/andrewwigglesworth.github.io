@@ -609,4 +609,84 @@ a {
   }
 }
 
+/* ===== Blog Feed Page ===== */
+
+.feed-layout {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+    align-items: start;
+}
+
+.feed-column {
+    margin-bottom: 0;
+}
+
+.feed-column-header {
+    margin-bottom: 1.25rem;
+}
+
+.feed-column-header h2 {
+    margin-bottom: 0.5rem;
+}
+
+.feed-column-header p {
+    color: #b0b0b0;
+    margin: 0;
+}
+
+.feed-scroll {
+    height: 720px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 0.75rem;
+    scrollbar-color: #64b5f6 #121212;
+    scrollbar-width: thin;
+}
+
+.feed-scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+.feed-scroll::-webkit-scrollbar-track {
+    background: #121212;
+    border-radius: 10px;
+}
+
+.feed-scroll::-webkit-scrollbar-thumb {
+    background: #64b5f6;
+    border-radius: 10px;
+}
+
+.feed-scroll::-webkit-scrollbar-thumb:hover {
+    background: #90caf9;
+}
+
+.manual-post {
+    background-color: #121212;
+    border: 1px solid #2d2d2d;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.manual-post h3 {
+    color: #64b5f6;
+    margin-top: 0;
+}
+
+.manual-post p {
+    color: #cfcfcf;
+}
+
+@media (max-width: 900px) {
+    .feed-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .feed-scroll {
+        height: 620px;
+    }
+}
+
 
