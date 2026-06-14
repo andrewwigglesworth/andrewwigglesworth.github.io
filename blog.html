@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Andrew Wigglesworth</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Cyber News & Blog</h1>
+
+        <p>
+            Cybersecurity updates, professional thoughts,
+            and technical writing in one place.
+        </p>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Me</a>
+            <a href="projects.html">Projects</a>
+            <a href="lab-notes.html">Lab Notes</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="card">
+            <h2>Cyber News & Updates</h2>
+
+            <p>
+                This page brings together my X feed for quick cybersecurity
+                news and updates, along with my Medium writing for longer
+                posts, reflections, and technical notes.
+            </p>
+        </section>
+
+        <section class="feed-layout">
+
+            <div class="feed-column card">
+                <div class="feed-column-header">
+                    <h2>X Feed</h2>
+                    <p>Short-form cybersecurity updates and reposted news.</p>
+                </div>
+
+                <div class="feed-scroll">
+                    <!--
+                        Replace YOUR_X_HANDLE with your X username.
+                        Example:
+                        href="https://twitter.com/andrewwigglesworth"
+                    -->
+                    <a class="twitter-timeline"
+                       data-theme="dark"
+                       data-height="700"
+                       href="https://twitter.com/YOUR_X_HANDLE">
+                       Posts by YOUR_X_HANDLE
+                    </a>
+                </div>
+            </div>
+
+            <div class="feed-column card">
+                <div class="feed-column-header">
+                    <h2>Medium Blog</h2>
+                    <p>Long-form posts, lessons learned, and technical writing.</p>
+                </div>
+
+                <div class="feed-scroll medium-placeholder">
+                    <!--
+                        Medium does not provide the same simple official embed
+                        that X provides. The easiest GitHub Pages option is to
+                        create an RSS widget from your Medium RSS feed and paste
+                        the iframe below.
+
+                        Medium RSS format:
+                        https://medium.com/feed/@YOUR_MEDIUM_USERNAME
+
+                        After creating a widget with a service like RSS.app,
+                        replace this placeholder block with their iframe.
+                    -->
+
+                    <div class="manual-post">
+                        <h3>Medium Feed Placeholder</h3>
+                        <p>
+                            Replace this area with a Medium RSS widget iframe,
+                            or manually add your latest Medium posts here.
+                        </p>
+                        <a class="button"
+                           href="https://medium.com/@YOUR_MEDIUM_USERNAME"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                           View Medium Profile
+                        </a>
+                    </div>
+
+                    <div class="manual-post">
+                        <h3>Example Blog Post Title</h3>
+                        <p>
+                            Short summary of a Medium article can go here if you
+                            choose to manually feature posts instead of using an
+                            embedded RSS widget.
+                        </p>
+                    </div>
+
+                    <div class="manual-post">
+                        <h3>Example Blog Post Title</h3>
+                        <p>
+                            Add another post summary, publication date, or topic
+                            tag here.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Andrew Wigglesworth</p>
+    </footer>
+
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</body>
+</html>
