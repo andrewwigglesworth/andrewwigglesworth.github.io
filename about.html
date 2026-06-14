@@ -1,378 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Me</title>
-
-  <style>
-    /* ===== General Styling ===== */
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #121212;
-      color: #e0e0e0;
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    /* ===== Header ===== */
-
-    header {
-      background-color: #1e1e1e;
-      text-align: center;
-      padding: 2rem;
-      border-bottom: 2px solid #2d2d2d;
-    }
-
-    header h1 {
-      margin-bottom: 0.5rem;
-    }
-
-    header p {
-      color: #b0b0b0;
-    }
-
-    /* ===== Navigation ===== */
-
-    nav {
-      margin-top: 1.5rem;
-    }
-
-    nav a {
-      color: #64b5f6;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #90caf9;
-    }
-
-    /* ===== Main Content ===== */
-
-    main {
-      max-width: 1000px;
-      margin: auto;
-      padding: 2rem;
-    }
-
-    /* ===== About Sections ===== */
-
-    .about-section {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      background-color: #1e1e1e;
-      border-radius: 10px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      border: 1px solid #2d2d2d;
-    }
-
-    .about-section.reverse {
-      flex-direction: row-reverse;
-    }
-
-    .image-placeholder {
-      flex: 1;
-      min-height: 260px;
-      border: 2px dashed #64b5f6;
-      border-radius: 10px;
-      background-color: #181818;
-      color: #b0b0b0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 1rem;
-      font-weight: bold;
-    }
-
-    .about-content {
-      flex: 1;
-    }
-
-    .about-content h2 {
-      margin-top: 0;
-      margin-bottom: 1rem;
-      color: #64b5f6;
-    }
-
-    .about-content p {
-      margin: 0;
-      color: #d0d0d0;
-    }
-
-    /* ===== Subtle About Page Motion ===== */
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  animation: page-fade-in 0.55s ease-out both;
-}
-
-header {
-  animation: header-slide-in 0.55s ease-out both;
-}
-
-nav a {
-  position: relative;
-}
-
-nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 100%;
-  height: 2px;
-  background-color: #90caf9;
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.25s ease;
-}
-
-nav a:hover::after {
-  transform: scaleX(1);
-}
-
-.about-section {
-  transition: transform 0.55s ease, opacity 0.55s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.about-section:hover {
-  transform: translateY(-4px);
-  border-color: #3a3a3a;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
-}
-
-.about-section.reveal-ready {
-  opacity: 0;
-  transform: translateY(24px);
-}
-
-.about-section.reveal-ready.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.image-placeholder {
-  transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
-}
-
-.about-section:hover .image-placeholder {
-  border-color: #90caf9;
-  background-color: #1c1c1c;
-  color: #e0e0e0;
-}
-
-@keyframes page-fade-in {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes header-slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(-12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-    .about-section {
-  transition: transform 0.55s ease, opacity 0.55s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-}
-
-.about-section:hover {
-  transform: translateY(-4px);
-  border-color: #3a3a3a;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
-}
-
-.about-section.reveal-ready {
-  opacity: 0;
-  transform: translateY(24px);
-}
-
-.about-section.reveal-ready.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-    /* ===== Footer ===== */
-
-    footer {
-      background-color: #1e1e1e;
-      text-align: center;
-      padding: 1.5rem;
-      border-top: 2px solid #2d2d2d;
-      color: #b0b0b0;
-    }
-
-    /* ===== Responsive Design ===== */
-
-    @media (max-width: 768px) {
-      nav a {
-        display: block;
-        margin: 10px 0;
-      }
-
-      main {
-        padding: 1rem;
-      }
-
-      .about-section,
-      .about-section.reverse {
-        flex-direction: column;
-        padding: 1.5rem;
-      }
-
-      .image-placeholder {
-        width: 100%;
-        min-height: 220px;
-      }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me | Andrew Wigglesworth</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
-  <header>
-    <h1>About Me</h1>
-    <p>A look into who I am beyond my professional work.</p>
-
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About Me</a>
-      <a href="projects.html">Projects</a>
-      <a href="lab-notes.html">Lab Notes</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html" aria-label="Home"><span class="brand-mark">AW</span><span>Andrew Wigglesworth</span></a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="projects.html">Projects</a>
+        <a href="lab-notes.html">Lab Notes</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section class="about-section">
-      <div class="image-placeholder">Basketball Image Placeholder</div>
-
-      <div class="about-content">
-        <h2>Love for Basketball</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae
-          justo at neque facilisis posuere. Sed euismod magna non luctus
-          tincidunt, ligula erat facilisis velit, vitae consequat lorem ipsum at
-          lorem.
-        </p>
+  <main class="page-shell">
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-copy scroll-reveal">
+          <p class="eyebrow">A look into who I am beyond my professional work</p>
+          <h1 class="display-title">About <span>Me</span></h1>
+          <p class="lead">This page highlights the personal interests, communities, and experiences that shape who I am beyond my professional cybersecurity work.</p>
+        </div>
+        <div class="hero-media scroll-reveal">
+          <div class="placeholder-image float-soft" data-label="Personal photo placeholder"></div>
+          <div class="placeholder-image" data-label="Community image placeholder"></div>
+          <div class="caption-card"><strong>Personal First</strong><span>Basketball, anime, video games, community, and leadership.</span></div>
+        </div>
       </div>
     </section>
 
-    <section class="about-section reverse">
-      <div class="image-placeholder">Anime Image Placeholder</div>
+    <section class="section">
+      <div class="section-inner">
+        <article class="feature-row">
+          <div class="feature-copy scroll-reveal">
+            <p class="eyebrow">Personal interest</p>
+            <h2>Love For <span class="accent">Basketball</span></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae justo at neque facilisis posuere. Sed euismod magna non luctus tincidunt, ligula erat facilisis velit, vitae consequat lorem ipsum at lorem.</p>
+          </div>
+          <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Basketball image placeholder"></div></div>
+        </article>
 
-      <div class="about-content">
-        <h2>Love for Anime</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae
-          justo at neque facilisis posuere. Sed euismod magna non luctus
-          tincidunt, ligula erat facilisis velit, vitae consequat lorem ipsum at
-          lorem.
-        </p>
-      </div>
-    </section>
+        <article class="feature-row reverse">
+          <div class="feature-copy scroll-reveal">
+            <p class="eyebrow">Personal interest</p>
+            <h2>Love For <span class="accent">Anime</span></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae justo at neque facilisis posuere. Sed euismod magna non luctus tincidunt, ligula erat facilisis velit, vitae consequat lorem ipsum at lorem.</p>
+          </div>
+          <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Anime image placeholder"></div></div>
+        </article>
 
-    <section class="about-section">
-      <div class="image-placeholder">Video Games Image Placeholder</div>
+        <article class="feature-row">
+          <div class="feature-copy scroll-reveal">
+            <p class="eyebrow">Personal interest</p>
+            <h2>Video <span class="accent">Games</span></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae justo at neque facilisis posuere. Sed euismod magna non luctus tincidunt, ligula erat facilisis velit, vitae consequat lorem ipsum at lorem.</p>
+          </div>
+          <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Video games image placeholder"></div></div>
+        </article>
 
-      <div class="about-content">
-        <h2>Video Games</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae
-          justo at neque facilisis posuere. Sed euismod magna non luctus
-          tincidunt, ligula erat facilisis velit, vitae consequat lorem ipsum at
-          lorem.
-        </p>
-      </div>
-    </section>
+        <article class="feature-row reverse">
+          <div class="feature-copy scroll-reveal">
+            <p class="eyebrow">Community</p>
+            <h2>Blacks In <span class="accent">Cybersecurity</span></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae justo at neque facilisis posuere. Sed euismod magna non luctus tincidunt, ligula erat facilisis velit, vitae consequat lorem ipsum at lorem.</p>
+          </div>
+          <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Blacks In Cybersecurity image placeholder"></div></div>
+        </article>
 
-    <section class="about-section reverse">
-      <div class="image-placeholder">Blacks In Cybersecurity Image Placeholder</div>
-
-      <div class="about-content">
-        <h2>Blacks In Cybersecurity</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae
-          justo at neque facilisis posuere. Sed euismod magna non luctus
-          tincidunt, ligula erat facilisis velit, vitae consequat lorem ipsum at
-          lorem.
-        </p>
-      </div>
-    </section>
-
-    <section class="about-section">
-      <div class="image-placeholder">Kappa Alpha Psi Image Placeholder</div>
-
-      <div class="about-content">
-        <h2>Kappa Alpha Psi Fraternity, Incorporated</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae
-          justo at neque facilisis posuere. Sed euismod magna non luctus
-          tincidunt, ligula erat facilisis velit, vitae consequat lorem ipsum at
-          lorem.
-        </p>
+        <article class="feature-row">
+          <div class="feature-copy scroll-reveal">
+            <p class="eyebrow">Brotherhood</p>
+            <h2>Kappa Alpha Psi Fraternity, <span class="accent">Incorporated</span></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae justo at neque facilisis posuere. Sed euismod magna non luctus tincidunt, ligula erat facilisis velit, vitae consequat lorem ipsum at lorem.</p>
+          </div>
+          <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Kappa Alpha Psi image placeholder"></div></div>
+        </article>
       </div>
     </section>
   </main>
 
-  <footer>
-    <p>© 2026 Andrew Wigglesworth. All rights reserved.</p>
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div><h2>Andrew Wigglesworth</h2><p>A look into who I am beyond my professional work.</p></div>
+      <div><h3>Pages</h3><div class="footer-links"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a></div></div>
+      <div><h3>Copyright</h3><p>&copy; 2026 Andrew Wigglesworth. All rights reserved.</p></div>
+    </div>
   </footer>
- <script>
-  const aboutSections = document.querySelectorAll(".about-section");
-
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        const section = entry.target;
-        const sectionIndex = Number(section.dataset.revealIndex);
-
-        if (entry.isIntersecting) {
-          section.style.transitionDelay = `${Math.min(sectionIndex * 80, 240)}ms`;
-          section.classList.add("is-visible");
-
-          setTimeout(() => {
-            section.style.transitionDelay = "";
-          }, 700);
-        } else {
-          section.style.transitionDelay = "0ms";
-          section.classList.remove("is-visible");
-        }
-      });
-    }, {
-      threshold: 0.22
-    });
-
-    aboutSections.forEach((section, index) => {
-      section.dataset.revealIndex = index;
-      section.classList.add("reveal-ready");
-      observer.observe(section);
-    });
-  } else {
-    aboutSections.forEach((section) => {
-      section.classList.add("is-visible");
-    });
-  }
-</script>
 </body>
 </html>
