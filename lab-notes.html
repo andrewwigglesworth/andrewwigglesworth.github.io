@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- lab-notes.html: Home for technical write-ups and troubleshooting records. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -8,10 +9,17 @@
   <script src="script.js" defer></script>
 </head>
 <body>
+  <!-- ===== SHARED HEADER ===== -->
   <header class="site-header">
     <div class="nav-wrap">
-      <a class="brand" href="index.html" aria-label="Home"><span class="brand-mark">AW</span><span>Andrew Wigglesworth</span></a>
-      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
+      <a class="brand" href="index.html" aria-label="Home">
+        <span class="brand-mark">AW</span>
+        <span>Andrew Wigglesworth</span></a>
+     
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+      </button>
+      
       <nav class="site-nav" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="about.html">About Me</a>
@@ -24,41 +32,71 @@
   </header>
 
   <main class="page-shell">
+    <!-- ===== LAB NOTES HERO ===== -->
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-copy scroll-reveal">
           <p class="eyebrow">Technical write-ups</p>
           <h1 class="display-title">Lab <span>Notes</span></h1>
-          <p class="lead">This section documents how I built projects, lessons learned, troubleshooting steps, and technical reflections.</p>
+          <p class="lead">
+            This section documents how I built projects, lessons learned, troubleshooting steps, and technical reflections.</p>
         </div>
+        
         <div class="hero-media scroll-reveal">
           <div class="placeholder-image float-soft" data-label="Lab notes hero image"></div>
           <div class="placeholder-image" data-label="Terminal screenshot placeholder"></div>
-          <div class="caption-card"><strong>Documented Growth</strong><span>Build notes, fixes, and reflections.</span></div>
+          <div class="caption-card">
+            <strong>Documented Growth</strong>
+            <span>Build notes, fixes, and reflections.</span>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- ===== WRITE-UP CATEGORIES ===== -->
     <section class="section">
       <div class="section-inner">
         <div class="split-heading scroll-reveal">
           <h2>Technical<br><span class="accent">Write-Ups</span></h2>
           <p>This space can hold walkthrough summaries, troubleshooting notes, diagrams, defensive takeaways, and lessons learned from each lab.</p>
         </div>
+
+        <!-- Each card can later link to a dedicated lab article page. -->
         <div class="card-grid">
-          <article class="mini-card scroll-reveal"><h3>Build Notes</h3><p>Document how each environment was planned, installed, configured, and improved.</p></article>
-          <article class="mini-card scroll-reveal"><h3>Lessons Learned</h3><p>Capture what worked, what failed, and what you would do differently next time.</p></article>
-          <article class="mini-card scroll-reveal"><h3>Troubleshooting</h3><p>Track errors, fixes, commands, screenshots, and technical reflections.</p></article>
+          <article class="mini-card scroll-reveal"><h3>Build Notes</h3><p>Document how each environment was planned, installed, configured, and improved.</p>
+          </article>
+          <article class="mini-card scroll-reveal"><h3>Lessons Learned</h3><p>Capture what worked, what failed, and what you would do differently next time.</p>
+          </article>
+          <article class="mini-card scroll-reveal"><h3>Troubleshooting</h3><p>Track errors, fixes, commands, screenshots, and technical reflections.</p>
+          </article>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- ===== LAB NOTES FOOTER ===== -->
   <footer class="site-footer">
     <div class="footer-grid">
-      <div><h2>Andrew Wigglesworth</h2><p>Technical write-ups, troubleshooting notes, and lab reflections.</p></div>
-      <div><h3>Pages</h3><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About Me</a><a href="projects.html">Projects</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div></div>
-      <div><h3>Copyright</h3><p>&copy; 2026 Andrew Wigglesworth</p></div>
+      <div>
+        <h2>Andrew Wigglesworth</h2>
+        <p>Technical write-ups, troubleshooting notes, and lab reflections.</p>
+      </div>
+      
+      <div>
+        <h3>Pages</h3>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About Me</a>
+          <a href="projects.html">Projects</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      
+      <div>
+        <h3>Copyright</h3>
+        <p>&copy; 2026 Andrew Wigglesworth</p>
+      </div>
     </div>
   </footer>
 </body>
