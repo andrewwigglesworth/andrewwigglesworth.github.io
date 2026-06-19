@@ -1,20 +1,47 @@
 <!DOCTYPE html>
+<!--
+  index.html: HOME PAGE
+  This is the main entry page for the portfolio.
+  HTML comments like this are visible in GITHub code but not on the website.
+-->
 <html lang="en">
 <head>
+  <!-- Allows standard letters, symbols, and punctuation to display correctly. -->
   <meta charset="UTF-8">
+ 
+  <!-- Makes the layout use the actual width of phones and tablets. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Text displayed in the browser tab and used by search engines. -->
   <title>Andrew Wigglesworth | Cybersecurity Portfolio</title>
+
+  <!-- Loads the shard visual design used by every page. -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- 
+    Loads shared interaction and animation code.
+    "defer" waits until the HTML has been read before running the script.
+  -->
   <script src="script.js" defer></script>
 </head>
 <body>
+  <!-- ===== SHARED SITE HEADER ===== -->
   <header class="site-header">
     <div class="nav-wrap">
+      <!-- Clicking the brand returns visitors to the home page. -->
       <a class="brand" href="index.html" aria-label="Home">
         <span class="brand-mark">AW</span>
         <span>Andrew Wigglesworth</span>
       </a>
-      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
+
+      <!-- Mobile menu button. JavaScript adds/removes the "is-open" class. -->
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span>
+      </button>
+
+      <!--
+        Main navigation.
+        script.js compares each href with the current filename and adds "is-active" to the matching link.
+      -->
       <nav class="site-nav" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="about.html">About Me</a>
@@ -26,22 +53,39 @@
     </div>
   </header>
 
+  <!-- ===== MAIN HOME-PAGE CONTENT ===== -->
   <main class="page-shell">
+    <!--
+      HERO SECTION
+      "hero-grid" creates two column on desktop.
+      "scroll-reveal" tells JavaScript to animate an elemnet into view.
+    -->
     <section class="hero">
       <div class="hero-grid">
+        <!-- Left hero column: introductory text and calls to action. -->
         <div class="hero-copy scroll-reveal">
           <p class="eyebrow">Systems Administrator | Cybersecurity Professional</p>
+
+          <!-- The span is colored red by .display-title span in style.css. -->
           <h1 class="display-title">Andrew <span>Wigglesworth</span></h1>
+          
           <p class="lead">Welcome to my personal cybersecurity portfolio. This website serves as a central location to showcase my professional experience, technical projects, home lab initiatives, and ongoing growth within the cybersecurity field.</p>
+          
           <p class="lead">I am passionate about building practical skills through hands-on learning, documenting my journey, and helping others break into technology and cybersecurity.</p>
+
+          <!-- Button links to important next pages. -->
           <div class="hero-actions">
             <a class="btn" href="projects.html">View Projects</a>
             <a class="btn ghost" href="contact.html">Connect With Me</a>
           </div>
         </div>
+
+        <!-- Right hero column: replace placeholder divs with real images later. -->
         <div class="hero-media scroll-reveal">
           <div class="placeholder-image float-soft" data-label="Professional photo placeholder"></div>
           <div class="placeholder-image" data-label="Cyber lab image placeholder"></div>
+          
+          <!-- Overlay card positioned over the image area by CSS. -->
           <div class="caption-card">
             <strong>Blacks In Cybersecurity Global Ambassador Lead</strong>
             <span>Leadership, mentorship, and community growth.</span>
@@ -50,26 +94,59 @@
       </div>
     </section>
 
+    <!-- ===== CURRENT FOCUS SECTION ===== -->
     <section class="section">
       <div class="section-inner">
+
+        <!-- Split heading places the title and descritpion in seperate columns. -->
         <div class="split-heading scroll-reveal">
           <h2>Current<br><span class="accent">Focus</span></h2>
           <p>These are the areas I am actively building, documenting, and improving as I continue growing in system administration and cybersecurity.</p>
         </div>
+
+        <!-- 
+          Card grid uses three columns on desktop and one column on mobile.
+          Each article is an independent focus item.
+        -->
         <div class="card-grid">
-          <article class="mini-card scroll-reveal"><h3>Home Labs</h3><p>Building and documenting cybersecurity home labs.</p></article>
-          <article class="mini-card scroll-reveal"><h3>Cloud Security</h3><p>Expanding knowledge of Azure security services and cloud technologies.</p></article>
-          <article class="mini-card scroll-reveal"><h3>Python Automation</h3><p>Developing Python automation skills for system administration and security tasks.</p></article>
-          <article class="mini-card scroll-reveal"><h3>Leadership</h3><p>Contributing to the cybersecurity community through leadership and mentorship initiatives.</p></article>
-          <article class="mini-card scroll-reveal"><h3>Write-Ups</h3><p>Creating technical write-ups to share lessons learned and demonstrate continuous growth.</p></article>
-          <article class="mini-card scroll-reveal"><h3>Portfolio Growth</h3><p>Using this site to organize projects, lab notes, and professional development.</p></article>
+          <article class="mini-card scroll-reveal">
+            <h3>Home Labs</h3>
+            <p>Building and documenting cybersecurity home labs.</p>
+          </article>
+          
+          <article class="mini-card scroll-reveal">
+            <h3>Cloud Security</h3>
+            <p>Expanding knowledge of Azure security services and cloud technologies.</p>
+          </article>
+          
+          <article class="mini-card scroll-reveal">
+            <h3>Python Automation</h3>
+            <p>Developing Python automation skills for system administration and security tasks.</p>
+          </article>
+          
+          <article class="mini-card scroll-reveal">
+            <h3>Leadership</h3>
+            <p>Contributing to the cybersecurity community through leadership and mentorship initiatives.</p>
+          </article>
+          
+          <article class="mini-card scroll-reveal">
+            <h3>Write-Ups</h3>
+            <p>Creating technical write-ups to share lessons learned and demonstrate continuous growth.</p>
+          </article>
+          
+          <article class="mini-card scroll-reveal">
+            <h3>Portfolio Growth</h3>
+            <p>Using this site to organize projects, lab notes, and professional development.</p>
+          </article>
         </div>
       </div>
     </section>
 
+<!-- ===== FINAL CALL-TO-ACTION BAND ===== -->
     <section class="section band">
       <div class="section-inner cta-band">
         <h2 class="scroll-reveal">Explore The<br><span class="accent">Portfolio</span></h2>
+        
         <div class="mini-card scroll-reveal">
           <p>Use the navigation above to learn more about my background, explore projects I have completed, read technical write-ups from my lab work, and connect with me professionally.</p>
           <a class="btn" href="about.html">Start With About Me</a>
@@ -78,11 +155,28 @@
     </section>
   </main>
 
+  <!-- ===== SHARED SITE FOOTER ===== -->
   <footer class="site-footer">
     <div class="footer-grid">
-      <div><h2>Andrew Wigglesworth</h2><p>Systems Administrator | Cybersecurity Professional | Blacks In Cybersecurity Global Ambassador Lead</p></div>
-      <div><h3>Pages</h3><div class="footer-links"><a href="about.html">About Me</a><a href="projects.html">Projects</a><a href="lab-notes.html">Lab Notes</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div></div>
-      <div><h3>Copyright</h3><p>&copy; 2026 Andrew Wigglesworth</p></div>
+      <div>
+        <h2>Andrew Wigglesworth</h2>
+        <p>Systems Administrator | Cybersecurity Professional | Blacks In Cybersecurity Global Ambassador Lead</p>
+      </div>
+      
+      <div>
+        <h3>Pages</h3>
+        <div class="footer-links">
+          <a href="about.html">About Me</a>
+          <a href="projects.html">Projects</a>
+          <a href="lab-notes.html">Lab Notes</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h3>Copyright</h3>
+        <p>&copy; 2026 Andrew Wigglesworth</p>
+      </div>
     </div>
   </footer>
 </body>
