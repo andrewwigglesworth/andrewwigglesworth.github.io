@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- projects.html: Displays hands-on technical and cybersecurity projects. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -8,10 +9,17 @@
   <script src="script.js" defer></script>
 </head>
 <body>
+  <!-- ===== SHARED HEADER ===== -->
   <header class="site-header">
     <div class="nav-wrap">
-      <a class="brand" href="index.html" aria-label="Home"><span class="brand-mark">AW</span><span>Andrew Wigglesworth</span></a>
-      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
+      <a class="brand" href="index.html" aria-label="Home">
+        <span class="brand-mark">AW</span>
+        <span>Andrew Wigglesworth</span></a>
+      
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+      </button>
+      
       <nav class="site-nav" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="about.html">About Me</a>
@@ -24,6 +32,7 @@
   </header>
 
   <main class="page-shell">
+    <!-- ===== PROJECTS HERO ===== -->
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-copy scroll-reveal">
@@ -31,6 +40,7 @@
           <h1 class="display-title">Projects</h1>
           <p class="lead">A focused collection of cybersecurity, systems administration, and lab projects I am building and documenting as part of my technical growth.</p>
         </div>
+
         <div class="hero-media scroll-reveal">
           <div class="placeholder-image float-soft" data-label="Project hero image placeholder"></div>
           <div class="placeholder-image" data-label="Lab screenshot placeholder"></div>
@@ -39,30 +49,53 @@
       </div>
     </section>
 
+    <!-- ===== FEATURED PROJECT ===== -->
     <section class="section">
       <div class="section-inner">
+        <!-- Duplicate this article to add another full project section. -->
         <article class="feature-row">
           <div class="feature-copy scroll-reveal">
             <p class="eyebrow">Featured project</p>
             <h2>Active Directory <span class="accent">Lab</span></h2>
             <p>Windows Server environment with domain-joined workstations.</p>
+
+            <!-- Project details use custom red square markers from style.css.-->
             <ul class="meta-list">
               <li>Windows Server environment placeholder.</li>
               <li>Domain-joined workstation documentation placeholder.</li>
               <li>Screenshots, architecture notes, and lessons learned can be added here.</li>
             </ul>
           </div>
-          <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Active Directory lab image placeholder"></div></div>
+          
+          <div class="feature-media scroll-reveal">
+            <div class="placeholder-image" data-label="Active Directory lab image placeholder"></div>
+          </div>
         </article>
       </div>
     </section>
   </main>
 
+  <!-- ===== PROJECTS FOOTER ===== -->
   <footer class="site-footer">
     <div class="footer-grid">
-      <div><h2>Andrew Wigglesworth</h2><p>Technical projects and cybersecurity lab work.</p></div>
-      <div><h3>Pages</h3><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About Me</a><a href="lab-notes.html">Lab Notes</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div></div>
-      <div><h3>Copyright</h3><p>&copy; 2026 Andrew Wigglesworth</p></div>
+      <div>
+        <h2>Andrew Wigglesworth</h2>
+        <p>Technical projects and cybersecurity lab work.</p>
+      </div>
+      <div>
+        <h3>Pages</h3>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About Me</a>
+          <a href="lab-notes.html">Lab Notes</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h3>Copyright</h3>
+        <p>&copy; 2026 Andrew Wigglesworth</p>
+      </div>
     </div>
   </footer>
 </body>
