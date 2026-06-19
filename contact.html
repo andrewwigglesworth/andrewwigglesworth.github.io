@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- contact.html: Professional links and ways to connect. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -8,10 +9,17 @@
   <script src="script.js" defer></script>
 </head>
 <body>
+  <!-- ===== SHARED HEADER ===== -->
   <header class="site-header">
     <div class="nav-wrap">
-      <a class="brand" href="index.html" aria-label="Home"><span class="brand-mark">AW</span><span>Andrew Wigglesworth</span></a>
-      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
+      <a class="brand" href="index.html" aria-label="Home">
+        <span class="brand-mark">AW</span>
+        <span>Andrew Wigglesworth</span></a>
+     
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span>
+      </span>
+      </button>
+      
       <nav class="site-nav" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="about.html">About Me</a>
@@ -24,45 +32,95 @@
   </header>
 
   <main class="page-shell">
+    <!-- ===== CONTACT HERO ===== -->
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-copy scroll-reveal">
           <p class="eyebrow">Connect with me</p>
           <h1 class="display-title">Connect <span>With Me</span></h1>
           <p class="lead">Use the links below to connect with me professionally, view my work, and follow my cybersecurity and systems administration growth.</p>
+          
           <div class="hero-actions">
-            <a class="btn" href="https://www.linkedin.com/in/andrew-wigglesworth/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a class="btn ghost" href="https://github.com/andrewwigglesworth" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <!-- target="_blank" opens the external site in a new tab. -->
+            <a class="btn" 
+              href="https://www.linkedin.com/in/andrew-wigglesworth/" 
+              target="_blank" 
+              rel="noopener noreferrer">
+              LinkedIn
+            </a>
+
+            <!-- rel="noopener noreferrer" protects the original browser tab. -->
+            <a class="btn ghost" 
+              href="https://github.com/andrewwigglesworth" 
+              target="_blank" 
+              rel="noopener noreferrer">
+              GitHub
+            </a>
           </div>
         </div>
+        
         <div class="hero-media scroll-reveal">
           <div class="placeholder-image float-soft" data-label="Contact image placeholder"></div>
           <div class="placeholder-image" data-label="Profile image placeholder"></div>
-          <div class="caption-card"><strong>Professional Links</strong><span>LinkedIn and GitHub are ready to use.</span></div>
+          <div class="caption-card">
+            <strong>Professional Links</strong>
+            <span>LinkedIn and GitHub are ready to use.</span>
+          </div>
         </div>
       </div>
     </section>
 
-   <!-- <section class="section">
+    <!--
+      OPTIONAL CONTACT CARDS
+      Remove the opening and closing comment markers if you want this section
+      to appear beneath the hero. -->
+
+    <section class="section">
       <div class="section-inner contact-grid">
         <div class="scroll-reveal">
           <p class="eyebrow">Contact links</p>
           <h2 class="display-title">Find Me <span>Online</span></h2>
-          <p class="lead">These links were pulled from your current contact page and placed into the new template style.</p>
+          <p class="lead">Use these cards as another way to display your professional links.</p>
         </div>
+
         <div class="contact-links">
-          <article class="contact-card scroll-reveal"><h2>LinkedIn</h2><p><a href="https://www.linkedin.com/in/andrew-wigglesworth/" target="_blank" rel="noopener noreferrer">linkedin.com/in/andrew-wigglesworth</a></p></article>
-          <article class="contact-card scroll-reveal"><h2>GitHub</h2><p><a href="https://github.com/andrewwigglesworth" target="_blank" rel="noopener noreferrer">github.com/andrewwigglesworth</a></p></article>
+          <article class="contact-card scroll-reveal">
+            <h2>LinkedIn</h2>
+            <p><a href="https://www.linkedin.com/in/andrew-wigglesworth/" target="_blank" rel="noopener noreferrer">linkedin.com/in/andrew-wigglesworth</a></p>
+          </article>
+
+          <article class="contact-card scroll-reveal">
+            <h2>GitHub</h2>
+            <p><a href="https://github.com/andrewwigglesworth" target="_blank" rel="noopener noreferrer">github.com/andrewwigglesworth</a></p>
+          </article>
         </div>
       </div>
-    </section> -->
+    </section>
+    
   </main>
 
+  <!-- ===== CONTACT FOOTER ===== -->
   <footer class="site-footer">
     <div class="footer-grid">
-      <div><h2>Andrew Wigglesworth</h2><p>Connect with me professionally.</p></div>
-      <div><h3>Pages</h3><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About Me</a><a href="projects.html">Projects</a><a href="lab-notes.html">Lab Notes</a><a href="blog.html">Blog</a></div></div>
-      <div><h3>Copyright</h3><p>&copy; 2026 Andrew Wigglesworth</p></div>
+      <div>
+        <h2>Andrew Wigglesworth</h2>
+        <p>Connect with me professionally.</p>
+      </div>
+      
+      <div>
+        <h3>Pages</h3>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About Me</a>
+          <a href="projects.html">Projects</a>
+          <a href="lab-notes.html">Lab Notes</a>
+          <a href="blog.html">Blog</a>
+        </div>
+      </div>
+      <div>
+        <h3>Copyright</h3>
+        <p>&copy; 2026 Andrew Wigglesworth</p>
+      </div>
     </div>
   </footer>
 </body>
