@@ -1,6 +1,9 @@
 <!DOCTYPE html>
+<!-- about.html: Personal interests, communities, and background. -->
+
 <html lang="en">
 <head>
+  <!-- Shared browser, responsive, stylesheet, and JavaScript setup. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Me | Andrew Wigglesworth</title>
@@ -8,10 +11,18 @@
   <script src="script.js" defer></script>
 </head>
 <body>
+  <!-- ===== SHARED HEADER AND NAVIGATION ===== -->
   <header class="site-header">
     <div class="nav-wrap">
-      <a class="brand" href="index.html" aria-label="Home"><span class="brand-mark">AW</span><span>Andrew Wigglesworth</span></a>
-      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
+      <a class="brand" href="index.html" aria-label="Home">
+        <span class="brand-mark">AW</span>
+        <span>Andrew Wigglesworth</span></a>
+
+      <!-- Only visible at the mobile breakpoint. -->
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+      </button>
+      
       <nav class="site-nav" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="about.html">About Me</a>
@@ -24,23 +35,35 @@
   </header>
 
   <main class="page-shell">
+    <!-- ===== ABOUT PAGE HERO ===== -->
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-copy scroll-reveal">
           <p class="eyebrow">A look into who I am beyond my professional work</p>
           <h1 class="display-title">About <span>Me</span></h1>
-          <p class="lead">This page highlights the personal interests, communities, and experiences that shape who I am beyond my professional cybersecurity work.</p>
+          <p class="lead">
+            This page highlights the personal interests, communities, and experiences that shape who I am beyond my professional cybersecurity work.
+          </p>
         </div>
+        
         <div class="hero-media scroll-reveal">
           <div class="placeholder-image float-soft" data-label="Personal photo placeholder"></div>
           <div class="placeholder-image" data-label="Community image placeholder"></div>
-          <div class="caption-card"><strong>Personal First</strong><span>Basketball, anime, video games, community, and leadership.</span></div>
+          <div class="caption-card">
+            <strong>Personal First</strong>
+            <span>Basketball, anime, video games, community, and leadership.</span>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- ===== ALTERNATING ABOUT SECTIONS ===== -->
     <section class="section">
       <div class="section-inner">
+        <!--
+          Standard feature row: text appears left and image appears right.
+          Replace the filler paragraph and placeholder image when ready.
+        -->
         <article class="feature-row">
           <div class="feature-copy scroll-reveal">
             <p class="eyebrow">Personal interest</p>
@@ -50,13 +73,15 @@
           <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Basketball image placeholder"></div></div>
         </article>
 
+        <!-- "reverse" swaps the image and text positions on desktop. -->
         <article class="feature-row reverse">
           <div class="feature-copy scroll-reveal">
             <p class="eyebrow">Personal interest</p>
             <h2>Love For <span class="accent">Anime</span></h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae justo at neque facilisis posuere. Sed euismod magna non luctus tincidunt, ligula erat facilisis velit, vitae consequat lorem ipsum at lorem.</p>
           </div>
-          <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Anime image placeholder"></div></div>
+          <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Anime image placeholder"></div>
+          </div>
         </article>
 
         <article class="feature-row">
@@ -65,7 +90,8 @@
             <h2>Video <span class="accent">Games</span></h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae justo at neque facilisis posuere. Sed euismod magna non luctus tincidunt, ligula erat facilisis velit, vitae consequat lorem ipsum at lorem.</p>
           </div>
-          <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Video games image placeholder"></div></div>
+          <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Video games image placeholder"></div>
+          </div>
         </article>
 
         <article class="feature-row reverse">
@@ -74,7 +100,8 @@
             <h2>Blacks In <span class="accent">Cybersecurity</span></h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae justo at neque facilisis posuere. Sed euismod magna non luctus tincidunt, ligula erat facilisis velit, vitae consequat lorem ipsum at lorem.</p>
           </div>
-          <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Blacks In Cybersecurity image placeholder"></div></div>
+          <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Blacks In Cybersecurity image placeholder"></div>
+          </div>
         </article>
 
         <article class="feature-row">
@@ -83,17 +110,36 @@
             <h2>Kappa Alpha Psi Fraternity, <span class="accent">Incorporated</span></h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae justo at neque facilisis posuere. Sed euismod magna non luctus tincidunt, ligula erat facilisis velit, vitae consequat lorem ipsum at lorem.</p>
           </div>
-          <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Kappa Alpha Psi image placeholder"></div></div>
+          <div class="feature-media scroll-reveal"><div class="placeholder-image" data-label="Kappa Alpha Psi image placeholder"></div>
+          </div>
         </article>
       </div>
     </section>
   </main>
 
+  <!-- ===== ABOUT PAGE FOOTER ===== -->
   <footer class="site-footer">
     <div class="footer-grid">
-      <div><h2>Andrew Wigglesworth</h2><p>A look into who I am beyond my professional work.</p></div>
-      <div><h3>Pages</h3><div class="footer-links"><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="lab-notes.html">Lab Notes</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div></div>
-      <div><h3>Copyright</h3><p>&copy; 2026 Andrew Wigglesworth. All rights reserved.</p></div>
+      <div>
+        <h2>Andrew Wigglesworth</h2>
+        <p>A look into who I am beyond my professional work.</p>
+      </div>
+      
+      <div>
+        <h3>Pages</h3>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="lab-notes.html">Lab Notes</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      
+      <div>
+        <h3>Copyright</h3>
+        <p>&copy; 2026 Andrew Wigglesworth. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 </body>
