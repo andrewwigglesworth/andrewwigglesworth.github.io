@@ -1,43 +1,29 @@
 <!DOCTYPE html>
+<!-- 
+    blog.html: X timeline and Medium writing page.
+    This clean version replaces the dublicated/merged blog markup currently present in the live repository.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog | Andrew Wigglesworth</title>
+
+    <!-- The live respository uses style.css, singular. -->
     <link rel="stylesheet" href="style.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog | Andrew Wigglesworth</title>
-  <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
 </head>
-
 <body>
+<!-- ===== SHARED HEADER ===== -->
   <header class="site-header">
     <div class="nav-wrap">
       <a class="brand" href="index.html" aria-label="Home">
         <span class="brand-mark">AW</span>
         <span>Andrew Wigglesworth</span>
       </a>
-      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span></button>
-      <nav class="site-nav" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="about.html">About Me</a>
-        <a href="projects.html">Projects</a>
-        <a href="lab-notes.html">Lab Notes</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-    <header>
-        <h1>Cyber News & Blog</h1>
-
-        <p>
-            Cybersecurity updates, professional thoughts,
-            and technical writing in one place.
-        </p>
+        
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span>
+      </button>
 
         <nav>
             <a href="index.html">Home</a>
@@ -49,11 +35,8 @@
         </nav>
     </header>
 
-    <main>
-
-        <section class="card">
-            <h2>Cyber News & Updates</h2>
   <main class="page-shell">
+    <!-- ===== BLOG HERO ===== -->
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-copy scroll-reveal">
@@ -64,6 +47,7 @@
             technical writing from Medium.
           </p>
         </div>
+          
         <div class="hero-media scroll-reveal">
           <div class="placeholder-image float-soft" data-label="Cyber news image placeholder"></div>
           <div class="placeholder-image" data-label="Blog writing placeholder"></div>
@@ -75,12 +59,7 @@
       </div>
     </section>
 
-            <p>
-                This page brings together my X feed for quick cybersecurity
-                news and updates, along with my Medium writing for longer
-                posts, reflections, and technical notes.
-            </p>
-        </section>
+    <!-- ===== TWO-COLUMN FEED AREA ===== -->
     <section class="section">
       <div class="section-inner">
         <div class="split-heading scroll-reveal">
@@ -91,8 +70,7 @@
             the rest of the page.
           </p>
         </div>
-
-        <section class="feed-layout">
+        <!-- ===== LEFT COLUMN: X TIMELINE ===== -->
         <div class="blog-feed-grid">
           <article class="blog-feed-panel scroll-reveal">
             <div class="blog-feed-header">
@@ -100,13 +78,12 @@
               <h2>Cyber News</h2>
               <p>Short-form cybersecurity updates, reposted news, and quick professional notes.</p>
             </div>  
-             <div class="feed-column card">
-                <div class="feed-column-header">
-                    <h2>X Feed</h2>
-                    <p>Short-form cybersecurity updates and reposted news.</p>
-                </div>
+
+            <!-- Fixed height + overflow-y creates independent scrolling. -->
             <div class="blog-feed-scroll">
-              <!-- Replace YOUR_X_HANDLE with your X username. -->
+              <!-- Replace YOUR_X_HANDLE with your X username.
+                    Example: href="https://twitter.com/username"
+                -->
               <a class="twitter-timeline"
                  data-theme="dark"
                  data-height="720"
@@ -115,20 +92,8 @@
               </a>
             </div>
           </article>
-
-                <div class="feed-scroll">
-                    <!--
-                        Replace YOUR_X_HANDLE with your X username.
-                        Example:
-                        href="https://twitter.com/andrewwigglesworth"
-                    -->
-                    <a class="twitter-timeline"
-                       data-theme="dark"
-                       data-height="700"
-                       href="https://twitter.com/YOUR_X_HANDLE">
-                       Posts by YOUR_X_HANDLE
-                    </a>
-                </div>
+            
+        <!-- ===== RIGHT COLUMN: MEDIUM POSTS ===== -->
           <article class="blog-feed-panel scroll-reveal">
             <div class="blog-feed-header">
               <p class="eyebrow">Medium feed</p>
@@ -136,62 +101,29 @@
               <p>Long-form posts, technical reflections, lessons learned, and portfolio writing.</p>
             </div>
 
-            <div class="feed-column card">
-                <div class="feed-column-header">
-                    <h2>Medium Blog</h2>
-                    <p>Long-form posts, lessons learned, and technical writing.</p>
-                </div>
             <div class="blog-feed-scroll">
               <!--
-                Medium does not provide the same simple official timeline embed
-                that X provides. Use an RSS widget service, then paste its iframe
-                inside this scroll area. -->
-              
-              
-              <div class="feed-scroll medium-placeholder">
-                    <!--
-                        Medium does not provide the same simple official embed
-                        that X provides. The easiest GitHub Pages option is to
-                        create an RSS widget from your Medium RSS feed and paste
-                        the iframe below.
-
-                        Medium RSS format:
-                        https://medium.com/feed/@YOUR_MEDIUM_USERNAME
-                Medium RSS format:
-                https://medium.com/feed/@YOUR_MEDIUM_USERNAME
-              -->
-                  <!--
-                        After creating a widget with a service like RSS.app,
-                        replace this placeholder block with their iframe.
-                    -->
-
+                Medium does not offer the same simple timeline embed as X.
+                You can:
+                1. Replace these cards manually with your article links, or
+                2. Use an RSS widget service with:
+                   https://medium.com/feed/@YOUR_MEDIUM_USERNAME 
+                -->
                     <div class="manual-post">
                         <h3>Medium Feed Placeholder</h3>
                         <p>
                             Replace this area with a Medium RSS widget iframe,
                             or manually add your latest Medium posts here.
                         </p>
-                        <a class="button"
+                        <a class="btn"
                            href="https://medium.com/@YOUR_MEDIUM_USERNAME"
                            target="_blank"
                            rel="noopener noreferrer">
                            View Medium Profile
                         </a>
                     </div>
-              <div class="manual-post">
-                <h3>Medium Feed Placeholder</h3>
-                <p>
-                  Replace this block with a Medium RSS widget iframe, or use
-                  these cards to manually feature your latest Medium articles.
-                </p>
-                <a class="btn"
-                   href="https://medium.com/@YOUR_MEDIUM_USERNAME"
-                   target="_blank"
-                   rel="noopener noreferrer">
-                   View Medium Profile
-                </a>
-              </div>
 
+            <!-- Duplicate a manual-post block for each Medium article. -->
                     <div class="manual-post">
                         <h3>Example Blog Post Title</h3>
                         <p>
@@ -200,13 +132,6 @@
                             embedded RSS widget.
                         </p>
                     </div>
-              <div class="manual-post">
-                <h3>Example Blog Post Title</h3>
-                <p>
-                  Add a short summary of one of your Medium articles here. You
-                  can include the topic, date, and why the post matters.
-                </p>
-              </div>
 
                     <div class="manual-post">
                         <h3>Example Blog Post Title</h3>
@@ -216,35 +141,36 @@
                         </p>
                     </div>
                 </div>
-              <div class="manual-post">
-                <h3>Example Blog Post Title</h3>
-                <p>
-                  Add another featured post summary here, or replace this entire
-                  area with an embedded RSS feed widget.
-                </p>
-              </div>
-            </div>
-          </article>
+            </article>
         </div>
-      </div>
+    </div>
     </section>
   </main>
 
-        </section>
+<!-- ===== BLOG FOOTER ===== -->
   <footer class="site-footer">
     <div class="footer-grid">
-      <div><h2>Andrew Wigglesworth</h2><p>Cybersecurity updates, technical writing, and professional reflections.</p></div>
-      <div><h3>Pages</h3><div class="footer-links"><a href="index.html">Home</a><a href="about.html">ABout Me</a><a href="projects.html">Projects</a><a href="lab-notes.html">Lab Notes</a><a href="contact.html">Contact</a></div></div>
-      <div><h3>Copyright</h3><p>&copy; 2026 Andrew Wigglesworth</p></div>
+      <div>
+          <h2>Andrew Wigglesworth</h2>
+          <p>Cybersecurity updates, technical writing, and professional reflections.</p></div>
+      <div>
+          <h3>Pages</h3>
+          <div class="footer-links">
+              <a href="index.html">Home</a>
+              <a href="about.html">ABout Me</a>
+              <a href="projects.html">Projects</a>
+              <a href="lab-notes.html">Lab Notes</a>
+              <a href="contact.html">Contact</a>
+          </div>
+      </div>
+      <div>
+          <h3>Copyright</h3>
+          <p>&copy; 2026 Andrew Wigglesworth</p>
+      </div>
     </div>
   </footer>
 
-    </main>
-
-    <footer>
-        <p>&copy; 2026 Andrew Wigglesworth</p>
-    </footer>
-
+    <!-- Required by X to transform the timeline link into an embedded feed. -->
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
