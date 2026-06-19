@@ -1,62 +1,99 @@
+/*
+  STYLE.CSS: SHARED DESIGN FOR EVERY PAGE
+
+  CSS comments are visible when reading the file in GitHub, but they do not
+  appear on the rendered website.
+
+  Text-size quick reference:
+  - Main hero heading: .display-title
+  - Normal intro text: .lead
+  - Navigation text: .site-nav a
+  - Small labels: .eyebrow
+  - Section headings: .split-heading h2 and .feature-copy h2
+  - Card headings: .mini-card h3
+  - Blog headings: .blog-feed-header h2
+*/
+
+/* ===== GLOBAL DESIGN VARIABLES ===== */
 :root {
-  --bg: #08090b;
-  --panel: #14171d;
-  --panel-strong: #1b2028;
-  --text: #f7f7f8;
-  --muted: #b8bec9;
-  --line: rgba(255, 255, 255, 0.13);
-  --red: #d81f2a;
-  --red-soft: rgba(216, 31, 42, 0.16);
+  /*
+    Variables store reusable colors and dimensions.
+    Change a value here to update that value throughout the website.
+  */
+  --bg: #08090b;                          /* Main background color */
+  --panel: #14171d;                       /* Standard panel background */
+  --panel-strong: #1b2028;                /* Lighter panel background */
+  --text: #f7f7f8;                        /* Main text color */
+  --muted: #b8bec9;                       /* Paragraph/secondary text */
+  --line: rgba(255, 255, 255, 0.13);      /* Subtle borders */
+  --red: #d81f2a;                         /* Main red accent */
+  --red-soft: rgba(216, 31, 42, 0.16);    /* Transparent red accent */
   --white: #ffffff;
-  --max: 1180px;
+  --max: 1180px;                          /* Maximum content width */
   --shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
 }
 
+/* Makes element width include its padding and border. */
 * {
   box-sizing: border-box;
 }
 
+/* Smoothly scrolls to links that point to page sections. */
 html {
   scroll-behavior: smooth;
 }
 
+/* ===== PAGE FOUNDATION AND ENTRY MOTION ===== */
 body {
-  margin: 0;
+  margin: 0; /* Removes the browser's default white margin. */
+
+  /* Creates the dark layered background with subtle red lighting. */
   background:
     radial-gradient(circle at 16% 10%, rgba(216, 31, 42, 0.14), transparent 28%),
     linear-gradient(180deg, #08090b 0%, #111319 48%, #08090b 100%);
+
   color: var(--text);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
+
+  /*
+    The page starts transparent and slightly lower.
+    script.js adds "page-ready" after the HTML loads.
+  */
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 520ms ease, transform 520ms ease;
 }
 
+/* Makes the page visible after script.js adds the class. */
 body.page-ready {
   opacity: 1;
   transform: translateY(0);
 }
 
+/* Fades the page before JavaScript navigates to another HTML page. */
 body.page-exit {
   opacity: 0;
   transform: translateY(8px);
 }
 
+/* Removes default link underlines and inherits surrounding text color. */
 a {
   color: inherit;
   text-decoration: none;
 }
 
+/* ===== STICKY HEADER ===== */
 .site-header {
-  position: sticky;
+  position: sticky; /* Keeps the header visible during scrolling. */
   top: 0;
-  z-index: 20;
+  z-index: 20;      /* Keeps the header above other content. */
   border-bottom: 1px solid var(--line);
   background: rgba(8, 9, 11, 0.86);
   backdrop-filter: blur(18px);
 }
 
+/* Centers and aligns the brand, mobile button, and nav links. */
 .nav-wrap {
   max-width: var(--max);
   min-height: 74px;
@@ -68,6 +105,7 @@ a {
   gap: 22px;
 }
 
+/* ===== BRAND / AW LOGO ===== */
 .brand {
   display: inline-flex;
   align-items: center;
@@ -85,8 +123,9 @@ a {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* ===== MOBILE MENU BUTTON ===== */
 .nav-toggle {
-  display: none;
+  display: none; /* Hidden on desktop; shown in the 900px media query. */
   width: 42px;
   height: 42px;
   border: 1px solid var(--line);
@@ -95,6 +134,9 @@ a {
   cursor: pointer;
 }
 
+/*
+  The real span and two pseudo-elements create the three hamburger lines.
+*/
 .nav-toggle span,
 .nav-toggle::before,
 .nav-toggle::after {
@@ -107,10 +149,12 @@ a {
   transition: transform 220ms ease, opacity 220ms ease;
 }
 
+/* When open, hide the middle line. */
 .nav-toggle.is-open span {
   opacity: 0;
 }
 
+/* Rotate the top and bottom lines into an X. */
 .nav-toggle.is-open::before {
   transform: translateY(6px) rotate(45deg);
 }
@@ -119,6 +163,7 @@ a {
   transform: translateY(-6px) rotate(-45deg);
 }
 
+/* ===== DESKTOP NAVIGATION ===== */
 .site-nav {
   display: flex;
   align-items: center;
@@ -129,12 +174,16 @@ a {
   position: relative;
   padding: 12px 10px;
   color: var(--muted);
+
+  /* CHANGE THIS to adjust navigation text size. */
   font-size: 0.9rem;
+
   font-weight: 800;
   text-transform: uppercase;
   transition: color 200ms ease;
 }
 
+/* Creates the hidden red line underneath each nav link. */
 .site-nav a::after {
   content: "";
   position: absolute;
@@ -148,28 +197,35 @@ a {
   transition: transform 220ms ease;
 }
 
+/* Makes hovered and active links white. */
 .site-nav a:hover,
 .site-nav a.is-active {
   color: var(--white);
 }
 
+/* Expands the red underline on hover or on the current page. */
 .site-nav a:hover::after,
 .site-nav a.is-active::after {
   transform: scaleX(1);
 }
 
+/* Prevents animated content from creating horizontal scrollbars. */
 .page-shell {
   overflow: hidden;
 }
 
+/* ===== HERO SECTION ===== */
 .hero {
-  min-height: calc(100vh - 74px);
+  min-height: calc(100vh - 74px); /* Full viewport minus header height */
   padding: clamp(54px, 8vw, 94px) 22px;
   display: grid;
   align-items: center;
   border-bottom: 1px solid var(--line);
 }
 
+/*
+  Shared two-column layout used by hero, feature, contact, and CTA sections.
+*/
 .hero-grid,
 .feature-row,
 .contact-grid,
@@ -182,16 +238,21 @@ a {
   align-items: center;
 }
 
+/* Small uppercase label shown above major headings. */
 .eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   color: var(--muted);
+
+  /* CHANGE THIS to adjust eyebrow/label text size. */
   font-size: 0.78rem;
+
   font-weight: 900;
   text-transform: uppercase;
 }
 
+/* Adds the red square before eyebrow text. */
 .eyebrow::before {
   content: "";
   width: 9px;
@@ -199,26 +260,38 @@ a {
   background: var(--red);
 }
 
+/* Main oversized title used at the top of every page. */
 .display-title {
   margin: 16px 0 20px;
   font-family: Georgia, "Times New Roman", serif;
+
+  /*
+    CHANGE THIS to adjust main hero title size.
+    clamp(minimum, responsive preference, maximum)
+  */
   font-size: clamp(3.2rem, 9vw, 8rem);
+
   line-height: 0.9;
   letter-spacing: 0;
 }
 
+/* Colors selected heading words red. */
 .display-title span,
 .accent {
   color: var(--red);
 }
 
+/* Large supporting paragraph used in hero sections. */
 .lead {
   max-width: 680px;
   margin: 0 0 28px;
   color: var(--muted);
+
+  /* CHANGE THIS to adjust hero paragraph text size. */
   font-size: clamp(1rem, 1.6vw, 1.2rem);
 }
 
+/* ===== BUTTONS ===== */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -238,6 +311,7 @@ a {
   background: #f02b37;
 }
 
+/* Secondary transparent button style. */
 .btn.ghost {
   background: transparent;
 }
@@ -252,11 +326,16 @@ a {
   gap: 14px;
 }
 
+/* ===== HERO IMAGE STACK ===== */
 .hero-media {
   position: relative;
   min-height: 540px;
 }
 
+/*
+  Generic image placeholder.
+  Replace a placeholder div with an img element when you have a real image.
+*/
 .placeholder-image {
   position: relative;
   min-height: 300px;
@@ -269,6 +348,7 @@ a {
   box-shadow: var(--shadow);
 }
 
+/* Dashed inner border inside every placeholder. */
 .placeholder-image::before {
   content: "";
   position: absolute;
@@ -276,6 +356,7 @@ a {
   border: 1px dashed rgba(255, 255, 255, 0.25);
 }
 
+/* Displays the HTML data-label value inside the placeholder. */
 .placeholder-image::after {
   content: attr(data-label);
   position: absolute;
@@ -287,12 +368,14 @@ a {
   text-transform: uppercase;
 }
 
+/* Makes the first hero placeholder large and right-aligned. */
 .hero-media .placeholder-image:first-child {
   min-height: 420px;
   width: 78%;
   margin-left: auto;
 }
 
+/* Overlaps the second placeholder at the lower left. */
 .hero-media .placeholder-image:nth-child(2) {
   position: absolute;
   left: 0;
@@ -302,6 +385,7 @@ a {
   border-color: rgba(216, 31, 42, 0.56);
 }
 
+/* Overlay text card positioned at the lower right. */
 .caption-card {
   position: absolute;
   right: 0;
@@ -325,6 +409,7 @@ a {
   font-size: 0.88rem;
 }
 
+/* ===== STANDARD PAGE SECTIONS ===== */
 .section {
   padding: clamp(70px, 9vw, 126px) 22px;
 }
@@ -334,6 +419,7 @@ a {
   margin: 0 auto;
 }
 
+/* Two-column title/description arrangement. */
 .split-heading {
   display: grid;
   grid-template-columns: 0.82fr 1.18fr;
@@ -342,6 +428,10 @@ a {
   margin-bottom: clamp(36px, 5vw, 62px);
 }
 
+/*
+  Shared section heading style.
+  CHANGE font-size here to resize section titles on multiple pages.
+*/
 .split-heading h2,
 .feature-copy h2,
 .feature-copy h3,
@@ -353,6 +443,7 @@ a {
   letter-spacing: 0;
 }
 
+/* Shared muted paragraph/link color. */
 .split-heading p,
 .feature-copy p,
 .mini-card p,
@@ -362,11 +453,13 @@ a {
   color: var(--muted);
 }
 
+/* ===== ALTERNATING FEATURE ROWS ===== */
 .feature-row {
   padding: clamp(38px, 5vw, 74px) 0;
   border-top: 1px solid var(--line);
 }
 
+/* Swaps text and image position when the HTML includes "reverse". */
 .feature-row.reverse .feature-copy {
   order: 2;
 }
@@ -375,6 +468,7 @@ a {
   order: 1;
 }
 
+/* ===== CUSTOM PROJECT DETAIL LIST ===== */
 .meta-list {
   display: grid;
   gap: 12px;
@@ -389,6 +483,7 @@ a {
   color: var(--muted);
 }
 
+/* Creates a red square instead of a standard list bullet. */
 .meta-list li::before {
   content: "";
   flex: 0 0 auto;
@@ -398,6 +493,7 @@ a {
   background: var(--red);
 }
 
+/* ===== CARD GRID ===== */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -424,10 +520,14 @@ a {
 .contact-card h2 {
   margin: 0 0 12px;
   font-family: Georgia, "Times New Roman", serif;
+
+  /* CHANGE THIS to resize headings inside cards. */
   font-size: 1.65rem;
+
   line-height: 1.1;
 }
 
+/* Alternate full-width section background. */
 .band {
   background:
     linear-gradient(90deg, rgba(216, 31, 42, 0.22), transparent 44%),
@@ -436,6 +536,7 @@ a {
   border-bottom: 1px solid var(--line);
 }
 
+/* ===== CONTACT PAGE SUPPORT ===== */
 .contact-grid {
   grid-template-columns: 0.9fr 1.1fr;
 }
@@ -450,6 +551,7 @@ a {
   font-weight: 900;
 }
 
+/* ===== FOOTER ===== */
 .site-footer {
   padding: 54px 22px;
   border-top: 1px solid var(--line);
@@ -475,7 +577,9 @@ a {
   gap: 8px;
 }
 
+/* ===== SCROLL REVEAL ANIMATION ===== */
 .scroll-reveal {
+  /* Starts hidden until script.js adds "is-visible". */
   opacity: 0;
   transform: translateY(34px);
   transition: opacity 680ms ease, transform 680ms ease;
@@ -487,6 +591,7 @@ a {
   transform: translateY(0);
 }
 
+/* ===== GENTLE PLACEHOLDER FLOATING MOTION ===== */
 .float-soft {
   animation: floatSoft 5.6s ease-in-out infinite;
 }
@@ -502,11 +607,94 @@ a {
   }
 }
 
+/* ===== BLOG PAGE: TWO INDEPENDENT FEEDS ===== */
+.blog-feed-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  align-items: start;
+}
+
+/* Outer frame for each feed. */
+.blog-feed-panel {
+  min-height: 820px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
+}
+
+.blog-feed-header {
+  margin-bottom: 18px;
+}
+
+.blog-feed-header h2 {
+  margin: 8px 0 10px;
+  font-family: Georgia, "Times New Roman", serif;
+
+  /* CHANGE THIS to resize X Feed and Medium Blog headings. */
+  font-size: clamp(2rem, 4vw, 3.8rem);
+
+  line-height: 0.96;
+}
+
+.blog-feed-header p:last-child {
+  margin: 0;
+  color: var(--muted);
+}
+
+/*
+  This is what makes each feed scroll independently.
+  height sets the visible window.
+  overflow-y: auto adds a vertical scrollbar when content is taller.
+*/
+.blog-feed-scroll {
+  height: 720px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 12px;
+  scrollbar-color: var(--red) #0c0e12;
+  scrollbar-width: thin;
+}
+
+/* Chrome/Safari scrollbar width. */
+.blog-feed-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+
+.blog-feed-scroll::-webkit-scrollbar-track {
+  background: #0c0e12;
+}
+
+.blog-feed-scroll::-webkit-scrollbar-thumb {
+  background: var(--red);
+}
+
+/* Manual Medium article card. */
+.manual-post {
+  padding: 22px;
+  margin-bottom: 16px;
+  border: 1px solid var(--line);
+  background: #0c0e12;
+}
+
+.manual-post h3 {
+  margin: 0 0 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.55rem;
+}
+
+.manual-post p {
+  color: var(--muted);
+}
+
+/* ===== TABLET AND MOBILE: 900PX OR LESS ===== */
 @media (max-width: 900px) {
+  /* Show the mobile menu button. */
   .nav-toggle {
     display: block;
   }
 
+  /* Change nav links from a desktop row to a hidden dropdown. */
   .site-nav {
     position: absolute;
     top: 74px;
@@ -523,6 +711,7 @@ a {
     transition: opacity 220ms ease, transform 220ms ease;
   }
 
+  /* JavaScript adds is-open when the mobile button is clicked. */
   .site-nav.is-open {
     transform: translateY(0);
     opacity: 1;
@@ -533,15 +722,18 @@ a {
     padding: 14px 0;
   }
 
+  /* Stack all major two-column layouts into one column. */
   .hero-grid,
   .feature-row,
   .contact-grid,
   .cta-band,
   .split-heading,
-  .footer-grid {
+  .footer-grid,
+  .blog-feed-grid {
     grid-template-columns: 1fr;
   }
 
+  /* Remove alternating order because everything is stacked. */
   .feature-row.reverse .feature-copy,
   .feature-row.reverse .feature-media {
     order: initial;
@@ -554,9 +746,19 @@ a {
   .hero-media {
     min-height: 430px;
   }
+
+  .blog-feed-panel {
+    min-height: auto;
+  }
+
+  .blog-feed-scroll {
+    height: 620px;
+  }
 }
 
+/* ===== SMALL PHONES: 620PX OR LESS ===== */
 @media (max-width: 620px) {
+  /* Hide full name in the header, leaving the AW logo. */
   .brand span:last-child {
     display: none;
   }
@@ -572,10 +774,12 @@ a {
     padding: 0 16px;
   }
 
+  /* CHANGE THIS to adjust hero title size specifically on phones. */
   .display-title {
     font-size: clamp(3.1rem, 17vw, 5.1rem);
   }
 
+  /* Stack hero visuals instead of overlapping them. */
   .hero-media {
     display: grid;
     gap: 16px;
@@ -592,7 +796,11 @@ a {
   }
 }
 
+/* ===== ACCESSIBILITY: REDUCED MOTION ===== */
 @media (prefers-reduced-motion: reduce) {
+  /*
+    Visitors who request reduced motion receive nearly instant animations.
+  */
   *,
   *::before,
   *::after {
@@ -602,112 +810,10 @@ a {
     transition-duration: 0.01ms !important;
   }
 
+  /* Content remains visible even though motion is disabled. */
   body,
   .scroll-reveal {
     opacity: 1;
     transform: none;
   }
 }
-
-/* ===== Blog Feed Page ===== */
-
-.feed-layout {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2rem;
-    align-items: start;
-.blog-feed-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-  align-items: start;
-}
-
-.feed-column {
-    margin-bottom: 0;
-.blog-feed-panel {
-  min-height: 820px;
-  padding: 24px;
-  border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
-}
-
-.feed-column-header {
-    margin-bottom: 1.25rem;
-.blog-feed-header {
-  margin-bottom: 18px;
-}
-
-.feed-column-header h2 {
-    margin-bottom: 0.5rem;
-.blog-feed-header h2 {
-  margin: 8px 0 10px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2rem, 4vw, 3.8rem);
-  line-height: 0.96;
-}
-
-.feed-column-header p {
-    color: #b0b0b0;
-    margin: 0;
-.blog-feed-header p:last-child {
-  margin: 0;
-  color: var(--muted);
-}
-
-.feed-scroll {
-    height: 720px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding-right: 0.75rem;
-    scrollbar-color: #64b5f6 #121212;
-    scrollbar-width: thin;
-.blog-feed-scroll {
-  height: 720px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 12px;
-  scrollbar-color: var(--red) #0c0e12;
-  scrollbar-width: thin;
-}
-
-.feed-scroll::-webkit-scrollbar {
-    width: 10px;
-}
-
-.feed-scroll::-webkit-scrollbar-track {
-    background: #121212;
-    border-radius: 10px;
-.blog-feed-scroll::-webkit-scrollbar {
-  width: 10px;
-}
-
-.feed-scroll::-webkit-scrollbar-thumb {
-    background: #64b5f6;
-    border-radius: 10px;
-.blog-feed-scroll::-webkit-scrollbar-track {
-  background: #0c0e12;
-}
-
-.feed-scroll::-webkit-scrollbar-thumb:hover {
-    background: #90caf9;
-.blog-feed-scroll::-webkit-scrollbar-thumb {
-  background: var(--red);
-}
-
-.manual-post {
-    background-color: #121212;
-    border: 1px solid #2d2d2d;
-    border-radius: 10px;
-    padding: 1.5rem;
-    margin-bottom: 1rem;
-  padding: 22px;
-  margin-bottom: 16px;
-  border: 1px solid var(--line);
-  background: #0c0e12;
-}
-
-.manual-post h3 {
-    color: #64b5f6;
-
-
