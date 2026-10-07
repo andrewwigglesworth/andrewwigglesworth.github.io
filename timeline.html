@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- PAGE SETTINGS: browser tab title, search description, and mobile sizing. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeline | Andrew Wigglesworth</title><meta name="description" content="Milestones, projects, and moments from my journey in technology and cybersecurity.">
+
+  <!-- Keep these filenames: shared theme first, timeline additions second. -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="timeline.css">
+  <!-- Shared navigation first; date sorting and timeline menu additions second. -->
+  <script src="script.js" defer></script>
+  <script src="timeline.js" defer></script>
+</head>
+<body class="page-ready timeline-page">
+  <!-- SHARED HEADER: keep these links consistent with your other pages. -->
+  <header class="site-header">
+    <div class="nav-wrap">
+      <!-- Clicking the brand returns visitors to the home page. -->
+      <a class="brand" href="index.html" aria-label="Home">
+        <span class="brand-mark">AW</span>
+        <span>Andrew Wigglesworth</span>
+      </a>
+
+      <!-- Mobile menu button. JavaScript adds/removes the "is-open" class. -->
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span>
+      </button>
+
+      <!--
+        Main navigation.
+        script.js compares each href with the current filename and adds "is-active" to the matching link.
+      -->
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="projects.html">Projects</a>
+        <a href="lab-notes.html">Lab Notes</a>
+        <a href="timeline.html" class="is-active" aria-current="page">Timeline</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content" class="page-shell">
+    <!-- PAGE INTRODUCTION: edit the heading and introductory text here. -->
+    <section class="timeline-intro">
+      <div class="section-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Experience · Learning · Community</p>
+          <h1 class="display-title">My <span>Timeline</span></h1>
+          <p class="lead">The projects, people, and milestones that shape my journey in technology and cybersecurity.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="timeline-section" aria-label="Milestones, newest first">
+      <div class="section-inner">
+        <div class="timeline-heading">
+          <p class="eyebrow">The journey so far</p>
+          <span>Newest first <span aria-hidden="true">↓</span></span>
+        </div>
+        <!-- Delete the next paragraph after replacing all sample entries. -->
+        <p class="sample-note">Sample entries and dates below show the layout. Replace them with your own milestones.</p>
+
+        <!--
+          HOW TO ADD A NEW TIMELINE ENTRY
+          1. Find BEGIN ENTRY below and its matching END ENTRY comment.
+          2. Copy that entire block, including the opening <li> and closing </li>.
+          3. Paste it INSIDE this <ol>, before the first entry for a newer event,
+             or between existing entries for an older event. Do not nest it inside
+             another entry, and do not copy the surrounding <ol> or </ol> tags.
+          4. Update both machine-readable dates (data-date and datetime), the
+             visible date, the article aria-label, category, title, and description.
+          5. Keep dates in YYYY-MM format, such as 2026-10. If you want exact days,
+             use YYYY-MM-DD consistently for every entry, such as 2026-10-06.
+          6. Keep newest entries at the top of this file. timeline.js also sorts
+             entries by data-date automatically when the page loads.
+
+          Left/right positions alternate automatically; no special class is needed.
+          Keep class names and tabindex="0" so styling and keyboard focus work.
+          The whole card (photo AND text) enlarges on hover or keyboard focus.
+          Reduced-motion preferences disable enlargement. Content stays visible.
+          Comments like this are editing notes and do not appear on the webpage.
+        -->
+        <ol class="timeline">
+          <!-- BEGIN ENTRY: copy from this comment through END ENTRY to add a milestone. -->
+          <!-- SORT DATE: update data-date below and datetime in the next section together. -->
+          <li class="timeline-entry" data-date="2026-10">
+            <div class="timeline-date">
+              <!-- DISPLAY DATE: edit the words between the time tags as well. -->
+              <time datetime="2026-10">October 2026</time>
+              <!-- Delete this span when this is a real milestone. -->
+              <span>Sample date</span>
+            </div>
+
+            <!-- Decorative dot on the timeline; leave this unchanged. -->
+            <span class="timeline-node" aria-hidden="true"></span>
+
+            <!-- ACCESSIBILITY: update aria-label to match your title and date. -->
+            <article class="timeline-card" tabindex="0" aria-label="A recent milestone, October 2026, sample entry">
+              <!--
+                PHOTO: keep the next div until you have a picture.
+                To add one, delete the entire placeholder div and replace it with:
+                <img class="timeline-photo" src="images/your-photo.jpg" alt="Describe what the photo shows" loading="lazy">
+                Put your image in your site's images folder and change src to its
+                exact filename. Use meaningful alt text. Keep timeline-photo.
+                Use either the placeholder OR the img, not both.
+              -->
+              <div class="placeholder-image timeline-photo" role="img" aria-label="Photo placeholder" data-label="Photo coming soon"></div>
+
+              <div class="timeline-copy">
+                <!-- CATEGORY: e.g., Certification, Project, Career, or Community. -->
+                <p class="eyebrow">Sample milestone</p>
+                <!-- TITLE: a short name for this milestone. -->
+                <h2>A recent milestone</h2>
+                <!-- DESCRIPTION: explain what you did, learned, or accomplished. -->
+                <p>Add your latest achievement, project, or professional milestone here. Share what you did and why it mattered.</p>
+              </div>
+            </article>
+          </li>
+          <!-- END ENTRY: stop copying here. -->
+
+          <!-- BEGIN ENTRY: copy from this comment through END ENTRY to add a milestone. -->
+          <!-- SORT DATE: update data-date below and datetime in the next section together. -->
+          <li class="timeline-entry" data-date="2026-06">
+            <div class="timeline-date">
+              <!-- DISPLAY DATE: edit the words between the time tags as well. -->
+              <time datetime="2026-06">June 2026</time>
+              <!-- Delete this span when this is a real milestone. -->
+              <span>Sample date</span>
+            </div>
+
+            <!-- Decorative dot on the timeline; leave this unchanged. -->
+            <span class="timeline-node" aria-hidden="true"></span>
+
+            <!-- ACCESSIBILITY: update aria-label to match your title and date. -->
+            <article class="timeline-card" tabindex="0" aria-label="A project worth sharing, June 2026, sample entry">
+              <!--
+                PHOTO: keep the next div until you have a picture.
+                To add one, delete the entire placeholder div and replace it with:
+                <img class="timeline-photo" src="images/your-photo.jpg" alt="Describe what the photo shows" loading="lazy">
+                Put your image in your site's images folder and change src to its
+                exact filename. Use meaningful alt text. Keep timeline-photo.
+                Use either the placeholder OR the img, not both.
+              -->
+              <div class="placeholder-image timeline-photo" role="img" aria-label="Photo placeholder" data-label="Photo coming soon"></div>
+
+              <div class="timeline-copy">
+                <!-- CATEGORY: e.g., Certification, Project, Career, or Community. -->
+                <p class="eyebrow">Sample milestone</p>
+                <!-- TITLE: a short name for this milestone. -->
+                <h2>A project worth sharing</h2>
+                <!-- DESCRIPTION: explain what you did, learned, or accomplished. -->
+                <p>Describe a project you completed, the skills you used, and what you learned along the way.</p>
+              </div>
+            </article>
+          </li>
+          <!-- END ENTRY: stop copying here. -->
+
+          <!-- BEGIN ENTRY: copy from this comment through END ENTRY to add a milestone. -->
+          <!-- SORT DATE: update data-date below and datetime in the next section together. -->
+          <li class="timeline-entry" data-date="2025-11">
+            <div class="timeline-date">
+              <!-- DISPLAY DATE: edit the words between the time tags as well. -->
+              <time datetime="2025-11">November 2025</time>
+              <!-- Delete this span when this is a real milestone. -->
+              <span>Sample date</span>
+            </div>
+
+            <!-- Decorative dot on the timeline; leave this unchanged. -->
+            <span class="timeline-node" aria-hidden="true"></span>
+
+            <!-- ACCESSIBILITY: update aria-label to match your title and date. -->
+            <article class="timeline-card" tabindex="0" aria-label="A moment of growth, November 2025, sample entry">
+              <!--
+                PHOTO: keep the next div until you have a picture.
+                To add one, delete the entire placeholder div and replace it with:
+                <img class="timeline-photo" src="images/your-photo.jpg" alt="Describe what the photo shows" loading="lazy">
+                Put your image in your site's images folder and change src to its
+                exact filename. Use meaningful alt text. Keep timeline-photo.
+                Use either the placeholder OR the img, not both.
+              -->
+              <div class="placeholder-image timeline-photo" role="img" aria-label="Photo placeholder" data-label="Photo coming soon"></div>
+
+              <div class="timeline-copy">
+                <!-- CATEGORY: e.g., Certification, Project, Career, or Community. -->
+                <p class="eyebrow">Sample milestone</p>
+                <!-- TITLE: a short name for this milestone. -->
+                <h2>A moment of growth</h2>
+                <!-- DESCRIPTION: explain what you did, learned, or accomplished. -->
+                <p>Add a certification, community event, leadership experience, or another meaningful step in your journey.</p>
+              </div>
+            </article>
+          </li>
+          <!-- END ENTRY: stop copying here. -->
+
+          <!-- BEGIN ENTRY: copy from this comment through END ENTRY to add a milestone. -->
+          <!-- SORT DATE: update data-date below and datetime in the next section together. -->
+          <li class="timeline-entry" data-date="2025-03">
+            <div class="timeline-date">
+              <!-- DISPLAY DATE: edit the words between the time tags as well. -->
+              <time datetime="2025-03">March 2025</time>
+              <!-- Delete this span when this is a real milestone. -->
+              <span>Sample date</span>
+            </div>
+
+            <!-- Decorative dot on the timeline; leave this unchanged. -->
+            <span class="timeline-node" aria-hidden="true"></span>
+
+            <!-- ACCESSIBILITY: update aria-label to match your title and date. -->
+            <article class="timeline-card" tabindex="0" aria-label="Where this chapter began, March 2025, sample entry">
+              <!--
+                PHOTO: keep the next div until you have a picture.
+                To add one, delete the entire placeholder div and replace it with:
+                <img class="timeline-photo" src="images/your-photo.jpg" alt="Describe what the photo shows" loading="lazy">
+                Put your image in your site's images folder and change src to its
+                exact filename. Use meaningful alt text. Keep timeline-photo.
+                Use either the placeholder OR the img, not both.
+              -->
+              <div class="placeholder-image timeline-photo" role="img" aria-label="Photo placeholder" data-label="Photo coming soon"></div>
+
+              <div class="timeline-copy">
+                <!-- CATEGORY: e.g., Certification, Project, Career, or Community. -->
+                <p class="eyebrow">Sample milestone</p>
+                <!-- TITLE: a short name for this milestone. -->
+                <h2>Where this chapter began</h2>
+                <!-- DESCRIPTION: explain what you did, learned, or accomplished. -->
+                <p>Share an earlier experience that helped shape your path in technology and cybersecurity.</p>
+              </div>
+            </article>
+          </li>
+          <!-- END ENTRY: stop copying here. -->
+
+        </ol>
+        <!-- Older entries go ABOVE the closing </ol>, never below it. -->
+        <p class="timeline-end">Every step builds on the last.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- SHARED FOOTER: keep page links consistent with your other pages. -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <h2>Andrew Wigglesworth</h2>
+        <p>Systems Administrator | Cybersecurity Professional | Blacks In Cybersecurity Global Ambassador Lead</p>
+      </div>
+      
+      <div>
+        <h3>Pages</h3>
+        <div class="footer-links">
+          <a href="about.html">About Me</a>
+          <a href="projects.html">Projects</a>
+          <a href="lab-notes.html">Lab Notes</a>
+          <a href="timeline.html">Timeline</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h3>Copyright</h3>
+        <p>&copy; 2026 Andrew Wigglesworth</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
