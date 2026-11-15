@@ -1,184 +1,948 @@
-<!DOCTYPE html>
-<!--
-  index.html: HOME PAGE
-  This is the main entry page for the portfolio.
-  HTML comments like this are visible in GITHub code but not on the website.
--->
+<!-- Use standards mode so modern browsers render the layout consistently. -->
+<!doctype html>
+<!-- The document uses English; change lang if you translate the site. -->
 <html lang="en">
-<head>
-  <!-- Allows standard letters, symbols, and punctuation to display correctly. -->
-  <meta charset="UTF-8">
- 
-  <!-- Makes the layout use the actual width of phones and tablets. -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Text displayed in the browser tab and used by search engines. -->
-  <title>Andrew Wigglesworth | Cybersecurity Portfolio</title>
-
-  <!-- Loads the shard visual design used by every page. -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- 
-    Loads shared interaction and animation code.
-    "defer" waits until the HTML has been read before running the script.
-  -->
-  <script src="script.js" defer></script>
-</head>
-<body>
-  <!-- ===== SHARED SITE HEADER ===== -->
-  <header class="site-header">
-    <div class="nav-wrap">
-      <!-- Clicking the brand returns visitors to the home page. -->
-      <a class="brand" href="index.html" aria-label="Home">
-        <span class="brand-mark">AW</span>
-        <span>Andrew Wigglesworth</span>
+  <!-- Browser metadata and references to the shared stylesheet and interaction script. -->
+  <head>
+    <!-- Set character encoding. -->
+    <meta charset="utf-8">
+    <!-- Use the actual device width for responsive layout. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- EDIT: Change this text to update the browser-tab title. -->
+    <title>
+      Andrew Wigglesworth | Portfolio
+    </title>
+    <!-- EDIT: This description summarizes your portfolio in search results. -->
+    <meta name="description" content="Andrew Wigglesworth — systems administration, cybersecurity, projects, and community.">
+    <!-- Load style.css; colors, type sizes, and section spacing are documented there. -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Load script.js after HTML parsing; defer ensures controls exist before JavaScript runs. -->
+    <script src="script.js" defer>
+    </script>
+  </head>
+  <!-- All visible page content starts here; JavaScript adds the light class when light mode is selected. -->
+  <body>
+    <!-- Keyboard shortcut link: visible when focused; bypasses navigation. -->
+    <a class="skip" href="#main">
+      Skip to content
+    </a>
+    <!-- Persistent navigation. Change --nav-top in style.css to adjust its distance from the screen top. -->
+    <header class="fresh-header">
+      <!-- Link destination: #home. EDIT: Change href to update where this link goes. -->
+      <a class="brand" href="#home">
+        <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+        <span class="mark">
+          AW
+        </span>
+        <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+        <span>
+          Andrew Wigglesworth
+        </span>
       </a>
-
-      <!-- Mobile menu button. JavaScript adds/removes the "is-open" class. -->
-      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span>
+      <!-- Interactive control; keep its class, ID, and data attributes because script.js uses them. -->
+      <button class="menu" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navigation">
+        Menu
       </button>
-
-      <!--
-        Main navigation.
-        script.js compares each href with the current filename and adds "is-active" to the matching link.
-      -->
-      <nav class="site-nav" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="about.html">About Me</a>
-        <a href="projects.html">Projects</a>
-        <a href="lab-notes.html">Lab Notes</a>
-        <a href="timeline.html">TimeLine</a>
-        <!-- <a href="blog.html">Blog</a> -->
-        <a href="contact.html">Contact</a>
+      <!-- Each href jumps to a matching section ID on this same page; keep both values synchronized. -->
+      <nav id="navigation" aria-label="Main navigation">
+        <!-- Link destination: #home. EDIT: Change href to update where this link goes. -->
+        <a href="#home" aria-current="location">
+          Home
+        </a>
+        <!-- Link destination: #about. EDIT: Change href to update where this link goes. -->
+        <a href="#about">
+          About
+        </a>
+        <!-- Link destination: #projects. EDIT: Change href to update where this link goes. -->
+        <a href="#projects">
+          Projects
+        </a>
+        <!-- Link destination: #lab-notes. EDIT: Change href to update where this link goes. -->
+        <a href="#lab-notes">
+          Lab Notes
+        </a>
+        <!-- Link destination: #timeline. EDIT: Change href to update where this link goes. -->
+        <a href="#timeline">
+          Timeline
+        </a>
+        <!-- Link destination: #blog. EDIT: Change href to update where this link goes. -->
+        <a href="#blog">
+          Blog
+        </a>
+        <!-- Link destination: #contact. EDIT: Change href to update where this link goes. -->
+        <a href="#contact">
+          Contact
+        </a>
       </nav>
-    </div>
-  </header>
-
-  <!-- ===== MAIN HOME-PAGE CONTENT ===== -->
-  <main class="page-shell">
-    <!--
-      HERO SECTION
-      "hero-grid" creates two column on desktop.
-      "scroll-reveal" tells JavaScript to animate an elemnet into view.
-    -->
-    <section class="hero">
-      <div class="hero-grid">
-        <!-- Left hero column: introductory text and calls to action. -->
-        <div class="hero-copy scroll-reveal">
-          <p class="eyebrow">Systems Administrator | Cybersecurity Professional</p>
-
-          <!-- The span is colored red by .display-title span in style.css. -->
-          <h1 class="display-title">Andrew <span>Wigglesworth</span></h1>
-          
-          <p class="lead">Welcome to my personal cybersecurity portfolio. This website serves as a central location to showcase my professional experience, technical projects, home lab initiatives, and ongoing growth within the cybersecurity field.</p>
-          
-          <p class="lead">I am passionate about building practical skills through hands-on learning, documenting my journey, and helping others break into technology and cybersecurity.</p>
-
-          <!-- Button links to important next pages. -->
-          <div class="hero-actions">
-            <a class="btn" href="projects.html">View Projects</a>
-            <a class="btn ghost" href="contact.html">Connect With Me</a>
+      <!-- Interactive control; keep its class, ID, and data attributes because script.js uses them. -->
+      <button id="theme" type="button">
+        ◐
+        <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+        <span>
+          Light mode
+        </span>
+      </button>
+    </header>
+    <!-- Main content landmark. The skip link jumps here for keyboard users. -->
+    <main id="main" class="wrap fade">
+      <!-- SECTION: home. EDIT: Change only this section’s margin or padding using #home in style.css. -->
+      <section id="home" class="page-section">
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="opening">
+          <!-- Layout wrapper. Keep the class names when editing text. -->
+          <div>
+            <!-- The one primary heading. EDIT: Change the words below; adjust --hero-size in style.css for its text size. -->
+            <h1>
+              Building technical skills.
+              <!-- Intentional line break; remove it if this text should flow on one line. -->
+              <br>
+              <!-- Accent-colored portion of the hero heading; not a separate heading. -->
+              <em>
+                Connecting through community.
+              </em>
+            </h1>
+            <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+            <p class="opening-copy">
+              I’m Andrew, a systems administrator and cybersecurity professional.
+              <!-- Intentional line break; remove it if this text should flow on one line. -->
+              <br>
+              I explore technology through hands-on projects, share what I learn,
+              <!-- Intentional line break; remove it if this text should flow on one line. -->
+              <br>
+              and help grow the communities I’m part of.
+            </p>
+            <!-- Layout wrapper for opening-actions. Keep the class names when editing text. -->
+            <div class="opening-actions">
+              <!-- Link destination: #workbench. EDIT: Change href to update where this link goes. -->
+              <a class="primary" href="#workbench">
+                Explore my work ↓
+              </a>
+              <!-- Link destination: #contact. EDIT: Change href to update where this link goes. -->
+              <a class="secondary" href="#contact">
+                Get in touch ↗
+              </a>
+            </div>
+            <!-- Layout wrapper for hero-socials. Keep the class names when editing text. -->
+            <div class="hero-socials">
+              <!-- Link destination: https://github.com/andrewwigglesworth. EDIT: Change href to update where this link goes. -->
+              <a href="https://github.com/andrewwigglesworth">
+                GitHub ↗
+              </a>
+              <!-- Link destination: https://www.linkedin.com/in/andrew-wigglesworth/. EDIT: Change href to update where this link goes. -->
+              <a href="https://www.linkedin.com/in/andrew-wigglesworth/">
+                LinkedIn ↗
+              </a>
+              <!-- Link destination: #blog. EDIT: Change href to update where this link goes. -->
+              <a href="#blog">
+                Writing ↗
+              </a>
+            </div>
+          </div>
+        </section>
+        <!-- SECTION: workbench. EDIT: Change only this section’s margin or padding using #workbench in style.css. -->
+        <section class="workbench" id="workbench">
+          <!-- Layout wrapper for sectionhead. Keep the class names when editing text. -->
+          <div class="sectionhead">
+            <!-- Layout wrapper. Keep the class names when editing text. -->
+            <div>
+              <!-- Section heading. EDIT: Change the text below; adjust --section-title-size for consistent section titles. -->
+              <h2>
+                Selected work
+              </h2>
+            </div>
+            <!-- Link destination: #projects. EDIT: Change href to update where this link goes. -->
+            <a class="textlink" href="#projects">
+              All projects ↗
+            </a>
+          </div>
+          <!-- Layout wrapper for showcase-toolbar. Keep the class names when editing text. -->
+          <div class="showcase-toolbar">
+            <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+            <span>
+              Project preview
+            </span>
+            <!-- Link destination: #projects. EDIT: Change href to update where this link goes. -->
+            <a href="#projects">
+              Explore projects ↗
+            </a>
+          </div>
+          <!-- Layout wrapper for workbench-frame. Keep the class names when editing text. -->
+          <div class="workbench-frame">
+            <!-- Layout wrapper for project-picker. Keep the class names when editing text. -->
+            <div class="project-picker" aria-label="Featured project selection">
+              <!-- Interactive control; keep its class, ID, and data attributes because script.js uses them. -->
+              <button class="pick active" data-project="0" aria-pressed="true">
+                Active Directory Lab
+                <!-- Layout wrapper. Keep the class names when editing text. -->
+                <b>
+                  ↗
+                </b>
+              </button>
+              <!-- Interactive control; keep its class, ID, and data attributes because script.js uses them. -->
+              <button class="pick" data-project="1" aria-pressed="false">
+                Anime List Tracker
+                <!-- Layout wrapper. Keep the class names when editing text. -->
+                <b>
+                  ↗
+                </b>
+              </button>
+              <!-- Interactive control; keep its class, ID, and data attributes because script.js uses them. -->
+              <button class="pick" data-project="2" aria-pressed="false">
+                Personal Website
+                <!-- Layout wrapper. Keep the class names when editing text. -->
+                <b>
+                  ↗
+                </b>
+              </button>
+            </div>
+            <!-- Layout wrapper for project-stage. Keep the class names when editing text. -->
+            <div class="project-stage" aria-live="polite">
+              <!-- Layout wrapper for stage-graphic. Keep the class names when editing text. -->
+              <div class="stage-graphic" aria-hidden="true">
+                <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+                <span id="stage-symbol">
+                  AD
+                </span>
+                <!-- Decorative CSS shape, hidden from assistive technology by the parent aria-hidden attribute. -->
+                <i>
+                </i>
+                <!-- Decorative CSS shape, hidden from assistive technology by the parent aria-hidden attribute. -->
+                <i>
+                </i>
+              </div>
+              <!-- Layout wrapper for stage-copy. Keep the class names when editing text. -->
+              <div class="stage-copy">
+                <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+                <h3 id="stage-title">
+                  Active Directory Lab
+                </h3>
+                <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+                <p id="stage-description">
+                  A Windows Server environment with domain-joined workstations.
+                </p>
+                <!-- Link destination: #project-0. EDIT: Change href to update where this link goes. -->
+                <a id="stage-link" class="textlink" href="#project-0">
+                  Explore project notes →
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+      <!-- SECTION: about. EDIT: Change only this section’s margin or padding using #about in style.css. -->
+      <section id="about" class="page-section">
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="page-intro">
+          <!-- Section heading. EDIT: Change the text below; adjust --section-title-size for consistent section titles. -->
+          <h2 class="section-title">
+            About me
+          </h2>
+          <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+          <p>
+            My background, the communities I’m part of, and what keeps me curious.
+          </p>
+        </section>
+        <!-- Layout wrapper for about-overview. Keep the class names when editing text. -->
+        <div class="about-overview">
+          <!-- ONE PHOTO PLACEHOLDER: Replace this div with the img example in CUSTOMIZATION.md; keep class="portrait". -->
+          <div class="portrait" role="img" aria-label="Portrait placeholder">
+            <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+            <span>
+              Your photo here
+            </span>
+          </div>
+          <!-- Layout wrapper. Keep the class names when editing text. -->
+          <div>
+            <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+            <p>
+              I’m a systems administrator and cybersecurity professional who enjoys learning through practical work and sharing that experience with others.
+            </p>
+            <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+            <p class="draft">
+              [Add a short introduction about your background, your path into technology, and the work you enjoy most.]
+            </p>
           </div>
         </div>
-
-        <!-- Right hero column: replace placeholder divs with real images later. -->
-        <div class="hero-media scroll-reveal">
-          <div class="placeholder-image float-soft" data-label="Professional photo placeholder"></div>
-          <div class="placeholder-image" data-label="Cyber lab image placeholder"></div>
-          
-          <!-- Overlay card positioned over the image area by CSS. -->
-          <div class="caption-card">
-            <strong>Blacks In Cybersecurity Global Ambassador Lead</strong>
-            <span>Leadership, mentorship, and community growth.</span>
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="content-band">
+          <!-- Layout wrapper. Keep the class names when editing text. -->
+          <div>
+            <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+            <h3>
+              Where I contribute.
+            </h3>
+            <!-- Layout wrapper for stacked. Keep the class names when editing text. -->
+            <div class="stacked">
+              <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+              <article>
+                <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+                <h3>
+                  Blacks In Cybersecurity
+                </h3>
+                <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+                <p>
+                  Global Ambassador Lead
+                </p>
+                <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+                <p class="draft">
+                  [Share what this role means to you and how you support the community.]
+                </p>
+              </article>
+              <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+              <article>
+                <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+                <h3>
+                  Kappa Alpha Psi Fraternity, Inc.
+                </h3>
+                <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+                <p class="draft">
+                  [Add a short note about your involvement and the experiences that have shaped you.]
+                </p>
+              </article>
+            </div>
           </div>
+        </section>
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="content-band">
+          <!-- Layout wrapper. Keep the class names when editing text. -->
+          <div>
+            <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+            <h3>
+              A few personal interests.
+            </h3>
+            <!-- Layout wrapper for interest-list. Keep the class names when editing text. -->
+            <div class="interest-list">
+              <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+              <article>
+                <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+                <h3>
+                  Basketball
+                </h3>
+                <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+                <p class="draft">
+                  [A favorite team, a memorable game, or what you enjoy about playing.]
+                </p>
+              </article>
+              <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+              <article>
+                <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+                <h3>
+                  Anime
+                  &
+                  video games
+                </h3>
+                <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+                <p class="draft">
+                  [A few favorites and what draws you to them.]
+                </p>
+              </article>
+              <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+              <article>
+                <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+                <h3>
+                  Continuous curiosity
+                </h3>
+                <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+                <p class="draft">
+                  [Something new you’re learning or exploring outside of work.]
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+      </section>
+      <!-- SECTION: projects. EDIT: Change only this section’s margin or padding using #projects in style.css. -->
+      <section id="projects" class="page-section">
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="page-intro">
+          <!-- Section heading. EDIT: Change the text below; adjust --section-title-size for consistent section titles. -->
+          <h2 class="section-title">
+            Projects
+          </h2>
+          <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+          <p>
+            Each project brings together the idea, the approach, and what I learned.
+          </p>
+        </section>
+        <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+        <article class="case" id="project-0">
+          <!-- Layout wrapper for case-top. Keep the class names when editing text. -->
+          <div class="case-top">
+            <!-- Layout wrapper. Keep the class names when editing text. -->
+            <div>
+              <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+              <h3>
+                Active Directory Lab
+              </h3>
+              <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+              <p>
+                A Windows Server environment with domain-joined workstations.
+              </p>
+              <!-- Layout wrapper for chips. Keep the class names when editing text. -->
+              <div class="chips">
+                <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+                <span>
+                  Windows Server
+                </span>
+                <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+                <span>
+                  Active Directory
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- Layout wrapper for case-details. Keep the class names when editing text. -->
+          <div class="case-details">
+            <!-- Layout wrapper. Keep the class names when editing text. -->
+            <div>
+              <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+              <h4>
+                What I built
+              </h4>
+              <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+              <p class="draft">
+                [Describe the environment, its purpose, and the configuration you built.]
+              </p>
+            </div>
+            <!-- Layout wrapper. Keep the class names when editing text. -->
+            <div>
+              <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+              <h4>
+                Notes
+                &
+                takeaways
+              </h4>
+              <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+              <p class="draft">
+                [Add architecture diagrams, screenshots, and lessons learned.]
+              </p>
+            </div>
+          </div>
+        </article>
+        <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+        <article class="case" id="project-1">
+          <!-- Layout wrapper for case-top. Keep the class names when editing text. -->
+          <div class="case-top">
+            <!-- Layout wrapper. Keep the class names when editing text. -->
+            <div>
+              <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+              <h3>
+                Anime List Tracker
+              </h3>
+              <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+              <p>
+                A browser-based tracker for shows you’ve watched and how you rate them.
+              </p>
+              <!-- Layout wrapper for chips. Keep the class names when editing text. -->
+              <div class="chips">
+                <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+                <span>
+                  HTML
+                </span>
+                <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+                <span>
+                  CSS
+                </span>
+                <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+                <span>
+                  JavaScript
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- Layout wrapper for case-details. Keep the class names when editing text. -->
+          <div class="case-details">
+            <!-- Layout wrapper. Keep the class names when editing text. -->
+            <div>
+              <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+              <h4>
+                What I built
+              </h4>
+              <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+              <p class="draft">
+                [Describe the core features and how the browser stores entries locally.]
+              </p>
+            </div>
+            <!-- Layout wrapper. Keep the class names when editing text. -->
+            <div>
+              <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+              <h4>
+                Notes
+                &
+                takeaways
+              </h4>
+              <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+              <p class="draft">
+                [Add screenshots, implementation notes, and next steps.]
+              </p>
+            </div>
+          </div>
+        </article>
+        <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+        <article class="case" id="project-2">
+          <!-- Layout wrapper for case-top. Keep the class names when editing text. -->
+          <div class="case-top">
+            <!-- Layout wrapper. Keep the class names when editing text. -->
+            <div>
+              <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+              <h3>
+                Personal Website
+              </h3>
+              <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+              <p>
+                A central place for professional experience, technical projects, and learning.
+              </p>
+              <!-- Layout wrapper for chips. Keep the class names when editing text. -->
+              <div class="chips">
+                <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+                <span>
+                  HTML
+                </span>
+                <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+                <span>
+                  CSS
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- Layout wrapper for case-details. Keep the class names when editing text. -->
+          <div class="case-details">
+            <!-- Layout wrapper. Keep the class names when editing text. -->
+            <div>
+              <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+              <h4>
+                What I built
+              </h4>
+              <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+              <p class="draft">
+                [Describe the site structure and the choices behind its design.]
+              </p>
+            </div>
+            <!-- Layout wrapper. Keep the class names when editing text. -->
+            <div>
+              <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+              <h4>
+                Notes
+                &
+                takeaways
+              </h4>
+              <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+              <p class="draft">
+                [Add development notes and future improvements.]
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+      <!-- SECTION: lab-notes. EDIT: Change only this section’s margin or padding using #lab-notes in style.css. -->
+      <section id="lab-notes" class="page-section">
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="page-intro">
+          <!-- Section heading. EDIT: Change the text below; adjust --section-title-size for consistent section titles. -->
+          <h2 class="section-title">
+            Lab notes
+          </h2>
+          <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+          <p>
+            A notebook for the steps, fixes, and discoveries that sit behind each project.
+          </p>
+        </section>
+        <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+        <article class="notebook">
+          <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+          <h3>
+            [Lab setup
+            &
+            configuration]
+          </h3>
+          <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+          <p>
+            Document a lab from the initial plan to a working environment.
+          </p>
+          <!-- Native expandable lab outline; works even without JavaScript. Add open here to start expanded. -->
+          <details>
+            <!-- Clickable label for the expandable outline; change only the label text to rename it. -->
+            <summary>
+              View write-up outline
+            </summary>
+            <!-- Definition list pairing each write-up field with its explanation. -->
+            <dl>
+              <!-- Write-up field label. -->
+              <dt>
+                Goal
+              </dt>
+              <!-- EDIT: Replace this field’s bracketed guidance with your actual lab notes. -->
+              <dd>
+                [What you wanted to build and why.]
+              </dd>
+              <!-- Write-up field label. -->
+              <dt>
+                Environment
+              </dt>
+              <!-- EDIT: Replace this field’s bracketed guidance with your actual lab notes. -->
+              <dd>
+                [Tools, versions, and network layout.]
+              </dd>
+              <!-- Write-up field label. -->
+              <dt>
+                Steps
+              </dt>
+              <!-- EDIT: Replace this field’s bracketed guidance with your actual lab notes. -->
+              <dd>
+                [The setup and verification process.]
+              </dd>
+            </dl>
+          </details>
+        </article>
+        <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+        <article class="notebook">
+          <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+          <h3>
+            [An issue, investigated]
+          </h3>
+          <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+          <p>
+            Record a specific problem and the path to a fix.
+          </p>
+          <!-- Native expandable lab outline; works even without JavaScript. Add open here to start expanded. -->
+          <details>
+            <!-- Clickable label for the expandable outline; change only the label text to rename it. -->
+            <summary>
+              View write-up outline
+            </summary>
+            <!-- Definition list pairing each write-up field with its explanation. -->
+            <dl>
+              <!-- Write-up field label. -->
+              <dt>
+                Symptoms
+              </dt>
+              <!-- EDIT: Replace this field’s bracketed guidance with your actual lab notes. -->
+              <dd>
+                [What failed and how you noticed.]
+              </dd>
+              <!-- Write-up field label. -->
+              <dt>
+                Investigation
+              </dt>
+              <!-- EDIT: Replace this field’s bracketed guidance with your actual lab notes. -->
+              <dd>
+                [Checks, commands, and findings.]
+              </dd>
+              <!-- Write-up field label. -->
+              <dt>
+                Resolution
+              </dt>
+              <!-- EDIT: Replace this field’s bracketed guidance with your actual lab notes. -->
+              <dd>
+                [The fix and how you verified it.]
+              </dd>
+            </dl>
+          </details>
+        </article>
+        <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+        <article class="notebook">
+          <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+          <h3>
+            [Lessons from the lab]
+          </h3>
+          <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+          <p>
+            Capture the decisions and discoveries worth carrying forward.
+          </p>
+          <!-- Native expandable lab outline; works even without JavaScript. Add open here to start expanded. -->
+          <details>
+            <!-- Clickable label for the expandable outline; change only the label text to rename it. -->
+            <summary>
+              View write-up outline
+            </summary>
+            <!-- Definition list pairing each write-up field with its explanation. -->
+            <dl>
+              <!-- Write-up field label. -->
+              <dt>
+                What worked
+              </dt>
+              <!-- EDIT: Replace this field’s bracketed guidance with your actual lab notes. -->
+              <dd>
+                [The choices that helped.]
+              </dd>
+              <!-- Write-up field label. -->
+              <dt>
+                What changed
+              </dt>
+              <!-- EDIT: Replace this field’s bracketed guidance with your actual lab notes. -->
+              <dd>
+                [The assumptions or approach you revised.]
+              </dd>
+              <!-- Write-up field label. -->
+              <dt>
+                Next time
+              </dt>
+              <!-- EDIT: Replace this field’s bracketed guidance with your actual lab notes. -->
+              <dd>
+                [What you would do differently.]
+              </dd>
+            </dl>
+          </details>
+        </article>
+      </section>
+      <!-- SECTION: timeline. EDIT: Change only this section’s margin or padding using #timeline in style.css. -->
+      <section id="timeline" class="page-section">
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="page-intro">
+          <!-- Section heading. EDIT: Change the text below; adjust --section-title-size for consistent section titles. -->
+          <h2 class="section-title">
+            Timeline
+          </h2>
+          <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+          <p>
+            A record of learning, community, and meaningful milestones.
+          </p>
+        </section>
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="year-group">
+          <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+          <h3>
+            2026
+          </h3>
+          <!-- Layout wrapper. Keep the class names when editing text. -->
+          <div>
+            <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+            <article class="milestone">
+              <!-- Layout wrapper for milestone-date. Keep the class names when editing text. -->
+              <div class="milestone-date">
+                AUG 05
+                <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+                <span>
+                  Community
+                </span>
+              </div>
+              <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+              <h3>
+                First year as a DEF CON GOON
+              </h3>
+              <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+              <p>
+                My fifth year at DEF CON, and my first volunteering as a GOON. A fantastic experience I look forward to repeating.
+              </p>
+            </article>
+            <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+            <article class="milestone">
+              <!-- Layout wrapper for milestone-date. Keep the class names when editing text. -->
+              <div class="milestone-date">
+                [MONTH]
+                <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+                <span>
+                  Placeholder
+                </span>
+              </div>
+              <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+              <h3>
+                [Add a milestone]
+              </h3>
+              <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+              <p class="draft">
+                [Describe a project, achievement, or experience and why it mattered.]
+              </p>
+            </article>
+          </div>
+        </section>
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="year-group">
+          <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+          <h3>
+            2025
+          </h3>
+          <!-- Layout wrapper. Keep the class names when editing text. -->
+          <div>
+            <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+            <article class="milestone">
+              <!-- Layout wrapper for milestone-date. Keep the class names when editing text. -->
+              <div class="milestone-date">
+                [MONTH]
+                <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+                <span>
+                  Placeholder
+                </span>
+              </div>
+              <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+              <h3>
+                [Add an earlier milestone]
+              </h3>
+              <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+              <p class="draft">
+                [Add the experience, your contribution, and a takeaway.]
+              </p>
+            </article>
+          </div>
+        </section>
+      </section>
+      <!-- SECTION: blog. EDIT: Change only this section’s margin or padding using #blog in style.css. -->
+      <section id="blog" class="page-section">
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="page-intro">
+          <!-- Section heading. EDIT: Change the text below; adjust --section-title-size for consistent section titles. -->
+          <h2 class="section-title">
+            Writing
+          </h2>
+          <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+          <p>
+            A space for longer thoughts on technology and community, alongside shorter updates.
+          </p>
+        </section>
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="writing-feature">
+          <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+          <h3>
+            [A thought worth exploring]
+          </h3>
+          <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+          <p class="draft">
+            [Add a concise introduction to your article. Give readers a sense of the question, experience, or idea it explores.]
+          </p>
+        </section>
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="content-band">
+          <!-- Layout wrapper. Keep the class names when editing text. -->
+          <div>
+            <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+            <h3>
+              From the notebook.
+            </h3>
+            <!-- Layout wrapper for article-list. Keep the class names when editing text. -->
+            <div class="article-list">
+              <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+              <article>
+                <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+                <h3>
+                  [Article title]
+                </h3>
+                <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+                <p class="draft">
+                  [A short summary of the idea and what readers can take away.]
+                </p>
+              </article>
+              <!-- Self-contained entry. Duplicate the complete article to add another item; give any ID a unique value. -->
+              <article>
+                <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+                <h3>
+                  [Article title]
+                </h3>
+                <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+                <p class="draft">
+                  [A short summary of the idea and what readers can take away.]
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="content-band">
+          <!-- Layout wrapper. Keep the class names when editing text. -->
+          <div>
+            <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+            <h3>
+              Continue the conversation.
+            </h3>
+            <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+            <p>
+              Quick observations, cybersecurity news, and conversations.
+            </p>
+            <!-- Link destination: https://x.com/_uncledrew11_. EDIT: Change href to update where this link goes. -->
+            <a class="textlink" href="https://x.com/_uncledrew11_">
+              Find me on X ↗
+            </a>
+          </div>
+        </section>
+      </section>
+      <!-- SECTION: contact. EDIT: Change only this section’s margin or padding using #contact in style.css. -->
+      <section id="contact" class="page-section">
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="page-intro">
+          <!-- Section heading. EDIT: Change the text below; adjust --section-title-size for consistent section titles. -->
+          <h2 class="section-title">
+            Contact
+          </h2>
+          <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+          <p>
+            Connect about technology, professional opportunities, or community initiatives.
+          </p>
+        </section>
+        <!-- Layout wrapper for contact-grid. Keep the class names when editing text. -->
+        <div class="contact-grid">
+          <!-- Link destination: https://www.linkedin.com/in/andrew-wigglesworth/. EDIT: Change href to update where this link goes. -->
+          <a class="route-card" href="https://www.linkedin.com/in/andrew-wigglesworth/">
+            <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+            <h3>
+              LinkedIn
+              <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+              <span>
+                ↗
+              </span>
+            </h3>
+            <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+            <p>
+              For professional introductions, connections, and community conversations.
+            </p>
+            <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+            <span class="card-link">
+              Connect on LinkedIn
+            </span>
+          </a>
+          <!-- Link destination: https://github.com/andrewwigglesworth. EDIT: Change href to update where this link goes. -->
+          <a class="route-card" href="https://github.com/andrewwigglesworth">
+            <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+            <h3>
+              GitHub
+              <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+              <span>
+                ↗
+              </span>
+            </h3>
+            <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+            <p>
+              Explore repositories, follow my work, and see what I’m building.
+            </p>
+            <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+            <span class="card-link">
+              Visit GitHub
+            </span>
+          </a>
         </div>
+        <!-- Group related content; its class connects this group to its documented CSS layout. -->
+        <section class="content-band">
+          <!-- Layout wrapper. Keep the class names when editing text. -->
+          <div>
+            <!-- Subheading. EDIT: Change the words here; use this element’s parent CSS selector to resize only this heading. -->
+            <h3>
+              Prefer email?
+            </h3>
+            <!-- EDIT: Replace this paragraph with your own text; bracketed text is an unfinished content placeholder. -->
+            <p class="draft">
+              [Add your professional email address here when you’re ready to share it.]
+            </p>
+          </div>
+        </section>
+      </section>
+    </main>
+    <!-- Footer: update copyright and remove the layout-preview note before public launch. -->
+    <footer>
+      <!-- Layout wrapper for wrap. Keep the class names when editing text. -->
+      <div class="wrap">
+        <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+        <span>
+          © 2026 Andrew Wigglesworth
+        </span>
+        <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+        <span>
+          Systems administration
+          &
+          cybersecurity
+        </span>
+        <!-- Inline text or decorative label; its class/ID may connect to CSS or JavaScript. -->
+        <span>
+          Layout preview · Placeholder content
+        </span>
       </div>
-    </section>
-
-    <!-- ===== CURRENT FOCUS SECTION ===== -->
-    <section class="section">
-      <div class="section-inner">
-
-        <!-- Split heading places the title and descritpion in seperate columns. -->
-        <div class="split-heading scroll-reveal">
-          <h2>Current<br><span class="accent">Focus</span></h2>
-          <p>These are the areas I am actively building, documenting, and improving as I continue growing in system administration and cybersecurity.</p>
-        </div>
-
-        <!-- 
-          Card grid uses three columns on desktop and one column on mobile.
-          Each article is an independent focus item.
-        -->
-        <div class="card-grid">
-          <article class="mini-card scroll-reveal">
-            <h3>Home Labs</h3>
-            <p>Building and documenting cybersecurity home labs.</p>
-          </article>
-          
-          <article class="mini-card scroll-reveal">
-            <h3>Networking and Making Meaningful Connections</h3>
-            <p>Going to various conferences, volunteering, and talking with various professionals to be able to expand my personal network.</p>
-          </article>
-          
-          <article class="mini-card scroll-reveal">
-            <h3>Python Automation</h3>
-            <p>Developing Python automation skills for system administration and security tasks.</p>
-          </article>
-          
-          <article class="mini-card scroll-reveal">
-            <h3>Leadership</h3>
-            <p>Contributing to the cybersecurity community through leadership and mentorship initiatives.</p>
-          </article>
-          
-          <article class="mini-card scroll-reveal">
-            <h3>Write-Ups</h3>
-            <p>Creating technical write-ups to share lessons learned and demonstrate continuous growth.</p>
-          </article>
-          
-          <article class="mini-card scroll-reveal">
-            <h3>Portfolio Growth</h3>
-            <p>Using this site to organize projects, lab notes, and professional development.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-<!-- ===== FINAL CALL-TO-ACTION BAND ===== -->
-    <section class="section band">
-      <div class="section-inner cta-band">
-        <h2 class="scroll-reveal">Explore The<br><span class="accent">Portfolio</span></h2>
-        
-        <div class="mini-card scroll-reveal">
-          <p>Use the navigation above to learn more about my background, explore projects I have completed, read technical write-ups from my lab work, and connect with me professionally.</p>
-          <a class="btn" href="about.html">Start With About Me</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ===== SHARED SITE FOOTER ===== -->
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div>
-        <h2>Andrew Wigglesworth</h2>
-        <p>Systems Administrator | Cybersecurity Professional | Blacks In Cybersecurity Global Ambassador Lead</p>
-      </div>
-      
-      <div>
-        <h3>Pages</h3>
-        <div class="footer-links">
-          <a href="about.html">About Me</a>
-          <a href="projects.html">Projects</a>
-          <a href="lab-notes.html">Lab Notes</a>
-          <!-- <a href="blog.html">Blog</a> -->
-          <a href="contact.html">Contact</a>
-        </div>
-      </div>
-      <div>
-        <h3>Copyright</h3>
-        <p>&copy; 2026 Andrew Wigglesworth</p>
-      </div>
-    </div>
-  </footer>
-</body>
+    </footer>
+  </body>
 </html>
