@@ -1,4 +1,6 @@
-/* Additive styles: the existing site theme remains in style.css. */
+/* 
+commented this page out for now.
+Additive styles: the existing site theme remains in style.css.
 .timeline-page .page-shell {overflow: clip;}
 .timeline-intro {padding: clamp(58px,7vw,92px) 22px 48px; border-bottom:1px solid var(--line);}
 .timeline-intro .lead {margin-bottom:0;}
@@ -26,7 +28,7 @@
 .timeline-card:focus-visible {outline:2px solid var(--gold);outline-offset:5px;transform:scale(1.035);z-index:3;}
 @media (hover:hover) and (pointer:fine) {.timeline-card:hover {transform:scale(1.035);border-color:var(--gold);box-shadow:var(--shadow);z-index:3;}}
 .timeline-end {text-align:center;color:var(--muted);font-size:.8rem;margin:0;}
-/* Hide closed navigation from keyboard navigation as well as sight. */
+ Hide closed navigation from keyboard navigation as well as sight. 
 @media (max-width:900px) {.timeline-page .site-nav:not(.is-open) {visibility:hidden;}}
 @media (max-width:680px) {
  .timeline-intro {padding:52px 16px 36px;}
@@ -42,3 +44,4 @@
  .timeline-heading {align-items:baseline;}
 }
 @media (prefers-reduced-motion:reduce) {.timeline-card {transition:none;} .timeline-card:hover,.timeline-card:focus-visible {transform:none;}}
+*/
