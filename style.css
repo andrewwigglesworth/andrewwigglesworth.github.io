@@ -1,1182 +1,1725 @@
-/*
-  STYLE.CSS: SHARED DESIGN FOR EVERY PAGE
+/* Andrew Wigglesworth portfolio — maintainable, dependency-free styles.
+   Start with :root for global settings. body.light overrides only theme colors.
+   Each declaration has an edit note. Mobile overrides are grouped at the end.
+   For section-only spacing, add #about { padding-top: 60px; } rather than editing all sections.
+   See CUSTOMIZATION.md for examples and a selector map. */
 
-  CSS comments are visible when reading the file in GitHub, but they do not
-  appear on the rendered website.
-
-  Text-size quick reference:
-  - Main hero heading: .display-title
-  - Normal intro text: .lead
-  - Navigation text: .site-nav a
-  - Small labels: .eyebrow
-  - Section headings: .split-heading h2 and .feature-copy h2
-  - Card headings: .mini-card h3
-  - Blog headings: .blog-feed-header h2
-*/
-
-/* ===== GLOBAL DESIGN VARIABLES ===== */
+/* Scope: :root. Changes here affect only matching elements. */
 :root {
-  /*
-    Variables store reusable colors and dimensions.
-    Change a value here to update that value throughout the website.
-  */
-  --bg: #090b0f;                          /* Main background color */
-  --panel: #11151b;                       /* Standard panel background */
-  --panel-strong: #171c24;                /* Lighter panel background */
-  --text: #f2f3f5;                        /* Main text color */
-  --muted: #a6adb8;                       /* Paragraph/secondary text */
-  --line: rgba(255, 255, 255, 0.10);      /* Subtle borders */
-  --red: #c72b36;                         /* Main red accent */
-  --red-soft: rgba(199, 43, 54, 0.12);    /* Transparent red accent */
-  --white: #ffffff;
-  --max: 1120px;                          /* Maximum content width */
-  --radius: 8px;
-  --shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+  /* EDIT: Page background color. */
+  --bg: #0b0b0e;
+  /* EDIT: Card and panel background color. */
+  --panel: #15151b;
+  /* EDIT: Primary text color. */
+  --text: #f0eff5;
+  /* EDIT: Secondary paragraph text color. */
+  --muted: #a5a2b0;
+  /* EDIT: Borders and background grid color. */
+  --line: #29272f;
+  /* EDIT: Crimson links and highlighted text. */
+  --accent: #c84b65;
+  /* EDIT: Subtle crimson selected or hover background. */
+  --hover: #2a1820;
+  /* EDIT: Primary button background; lower brightness for darker crimson. */
+  --button: #94213d;
+  /* EDIT: Primary button color on hover. */
+  --button-hover: #7b1831;
+  /* EDIT: Maximum content width; increase to make the desktop page wider. */
+  --page-width: 1180px;
+  /* EDIT: Space between content and the left/right edges. */
+  --page-gutter: 32px;
+  /* EDIT: Hero text size; clamp sets minimum, responsive target, maximum. */
+  --hero-size: clamp(42px,5vw,66px);
+  /* EDIT: Text size shared by the main section headings. */
+  --section-title-size: 32px;
+  /* EDIT: Default body text size. */
+  --body-size: 15px;
+  /* EDIT: Top and bottom padding of every main section except Home. */
+  --section-space: 52px;
+  /* EDIT: Sticky navigation distance from the top edge. */
+  --nav-top: 14px;
+  /* EDIT: Space above a section after jumping to its anchor. */
+  --anchor-offset: 100px;
 }
 
-/* Makes element width include its padding and border. */
+/* Scope: body.light. Changes here affect only matching elements. */
+body.light {
+  /* EDIT: Page background color. */
+  --bg: #faf9fd;
+  /* EDIT: Card and panel background color. */
+  --panel: #ffffff;
+  /* EDIT: Primary text color. */
+  --text: #211c2d;
+  /* EDIT: Secondary paragraph text color. */
+  --muted: #6f687e;
+  /* EDIT: Borders and background grid color. */
+  --line: #e1dce9;
+  /* EDIT: Crimson links and highlighted text. */
+  --accent: #8d1935;
+  /* EDIT: Subtle crimson selected or hover background. */
+  --hover: #f3e2e7;
+}
+
+/* Scope: *. Changes here affect only matching elements. */
 * {
+  /* Include padding and borders in the declared element width. */
   box-sizing: border-box;
 }
 
-/* Smoothly scrolls to links that point to page sections. */
+/* Scope: html. Changes here affect only matching elements. */
 html {
-  scroll-behavior: smooth;
+  /* Use predictable instant section jumps. */
+  scroll-behavior: auto;
 }
 
-/* ===== PAGE FOUNDATION AND ENTRY MOTION ===== */
+/* Scope: body. Changes here affect only matching elements. */
 body {
-  margin: 0; /* Removes the browser's default white margin. */
-
-  /* Creates the dark layered background with subtle red lighting. */
-  background:
-    radial-gradient(circle at 12% 4%, rgba(199, 43, 54, 0.08), transparent 26%),
-    linear-gradient(180deg, #090b0f 0%, #0d1015 52%, #090b0f 100%);
-
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0;
+  /* Set the page base color. */
+  background-color: var(--bg);
+  /* Draw the subtle grid using CSS; remove this property for a plain background. */
+  background-image: linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  /* EDIT: Adjust these values to make the background grid squares larger or smaller. */
+  background-size: 80px 80px;
+  /* Blend the grid into the page without a separate image file. */
+  background-blend-mode: soft-light;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
   color: var(--text);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  line-height: 1.65;
-
-  /*
-    The page starts transparent and slightly lower.
-    script.js adds "page-ready" after the HTML loads.
-  */
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 520ms ease, transform 520ms ease;
+  /* Choose the system font stack so the site needs no external font service. */
+  font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: var(--body-size);
+  /* EDIT: Adjust the space between lines of text. */
+  line-height: 1.75;
 }
 
-/* Makes the page visible after script.js adds the class. */
-body.page-ready {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Fades the page before JavaScript navigates to another HTML page. */
-body.page-exit {
-  opacity: 0;
-  transform: translateY(8px);
-}
-
-/* Removes default link underlines and inherits surrounding text color. */
+/* Scope: a. Changes here affect only matching elements. */
 a {
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
   color: inherit;
+  /* Control link underlines. */
   text-decoration: none;
 }
 
-/* ===== STICKY HEADER ===== */
-.site-header {
-  position: sticky; /* Keeps the header visible during scrolling. */
-  top: 0;
-  z-index: 20;      /* Keeps the header above other content. */
-  border-bottom: 1px solid var(--line);
-  background: rgba(9, 11, 15, 0.88);
-  backdrop-filter: blur(16px);
+/* Scope: a:hover. Changes here affect only matching elements. */
+a:hover {
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--accent);
 }
 
-/* Centers and aligns the brand, mobile button, and nav links. */
-.nav-wrap {
-  max-width: var(--max);
-  min-height: 68px;
-  margin: 0 auto;
-  padding: 0 22px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 22px;
-}
-
-/* ===== BRAND / AW LOGO ===== */
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.86rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.brand-mark {
-  width: 34px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, var(--red), #7a1118);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 5px;
-}
-
-/* ===== MOBILE MENU BUTTON ===== */
-.nav-toggle {
-  display: none; /* Hidden on desktop; shown in the 900px media query. */
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--line);
-  background: transparent;
-  color: var(--white);
+/* Scope: button. Changes here affect only matching elements. */
+button {
+  /* Set inherited font properties together. */
+  font: inherit;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: inherit;
+  /* Show the pointer for an interactive control. */
   cursor: pointer;
 }
 
-/*
-  The real span and two pseudo-elements create the three hamburger lines.
-*/
-.nav-toggle span,
-.nav-toggle::before,
-.nav-toggle::after {
-  content: "";
-  display: block;
-  width: 18px;
-  height: 2px;
-  margin: 4px auto;
-  background: currentColor;
-  transition: transform 220ms ease, opacity 220ms ease;
+/* Scope: h1,h2,h3,h4. Changes here affect only matching elements. */
+h1,h2,h3,h4 {
+  /* Choose the system font stack so the site needs no external font service. */
+  font-family: inherit;
+  /* EDIT: Adjust the space between lines of text. */
+  line-height: 1.4;
+  /* EDIT: Adjust the space between letters; negative values tighten headings. */
+  letter-spacing: -.5px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0 0 16px;
+  /* EDIT: Adjust text weight; 400 is regular and 600 is semibold. */
+  font-weight: 600;
 }
 
-/* When open, hide the middle line. */
-.nav-toggle.is-open span {
-  opacity: 0;
-}
-
-/* Rotate the top and bottom lines into an X. */
-.nav-toggle.is-open::before {
-  transform: translateY(6px) rotate(45deg);
-}
-
-.nav-toggle.is-open::after {
-  transform: translateY(-6px) rotate(-45deg);
-}
-
-/* ===== DESKTOP NAVIGATION ===== */
-.site-nav {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.site-nav a {
-  position: relative;
-  padding: 12px 10px;
+/* Scope: p. Changes here affect only matching elements. */
+p {
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
   color: var(--muted);
-
-  /* CHANGE THIS to adjust navigation text size. */
-  font-size: 0.78rem;
-
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: color 200ms ease;
+  /* EDIT: Adjust the space between lines of text. */
+  line-height: 1.8;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0 0 15px;
 }
 
-/* Creates the hidden red line underneath each nav link. */
-.site-nav a::after {
-  content: "";
+/* Scope: a:focus-visible,button:focus-visible,summary:focus-visible. Changes here affect only matching elements. */
+a:focus-visible,button:focus-visible,summary:focus-visible {
+  /* Set the visible keyboard-focus indicator. */
+  outline: 2px solid var(--accent);
+  /* Separate the focus ring from the control. */
+  outline-offset: 4px;
+}
+
+/* Scope: .skip. Changes here affect only matching elements. */
+.skip {
+  /* Set positioning behavior; sticky keeps navigation visible while scrolling. */
   position: absolute;
+  /* Set horizontal positioning from the left edge. */
+  left: -999px;
+}
+
+/* Scope: .skip:focus. Changes here affect only matching elements. */
+.skip:focus {
+  /* Set horizontal positioning from the left edge. */
   left: 10px;
-  right: 10px;
-  bottom: 7px;
-  height: 2px;
-  background: var(--red);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 220ms ease;
+  /* Set distance from the top; sticky uses this as its sticking point. */
+  top: 5px;
+  /* Set this element’s fill or gradient. */
+  background: var(--bg);
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 8px;
+  /* Set stacking order; larger values appear above smaller values. */
+  z-index: 200;
 }
 
-/* Makes hovered and active links white. */
-.site-nav a:hover,
-.site-nav a.is-active {
-  color: var(--white);
-}
-
-/* Expands the red underline on hover or on the current page. */
-.site-nav a:hover::after,
-.site-nav a.is-active::after {
-  transform: scaleX(1);
-}
-
-/* Prevents animated content from creating horizontal scrollbars. */
-.page-shell {
-  overflow: hidden;
-}
-
-/* ===== HERO SECTION ===== */
-.hero {
-  min-height: min(820px, calc(100vh - 68px));
-  padding: clamp(68px, 8vw, 104px) 22px;
-  display: grid;
-  align-items: center;
-  border-bottom: 1px solid var(--line);
-}
-
-/*
-  Shared two-column layout used by hero, feature, contact, and CTA sections.
-*/
-.hero-grid,
-.feature-row,
-.contact-grid,
-.cta-band {
-  max-width: var(--max);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
-  gap: clamp(44px, 7vw, 84px);
-  align-items: center;
-}
-
-/* Small uppercase label shown above major headings. */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--muted);
-
-  /* CHANGE THIS to adjust eyebrow/label text size. */
-  font-size: 0.7rem;
-
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-/* Adds the red square before eyebrow text. */
-.eyebrow::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 2px;
-  background: var(--red);
-}
-
-/* Main oversized title used at the top of every page. */
-.display-title {
-  margin: 16px 0 20px;
-  font-family: Georgia, "Times New Roman", serif;
-
-  /*
-    CHANGE THIS to adjust main hero title size.
-    clamp(minimum, responsive preference, maximum)
-  */
-  font-size: clamp(3rem, 6.8vw, 6.25rem);
-
-  line-height: 0.94;
-  letter-spacing: -0.035em;
-}
-
-/* Colors selected heading words red. */
-.display-title span,
-.accent {
-  color: var(--red);
-}
-
-/* Large supporting paragraph used in hero sections. */
-.lead {
-  max-width: 680px;
-  margin: 0 0 28px;
-  color: var(--muted);
-
-  /* CHANGE THIS to adjust hero paragraph text size. */
-  font-size: clamp(0.98rem, 1.3vw, 1.08rem);
-}
-
-/* ===== BUTTONS ===== */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 43px;
-  padding: 0 17px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: var(--red);
-  color: var(--white);
-  border-radius: 5px;
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: transform 200ms ease, background 200ms ease;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  background: #f02b37;
-}
-
-/* Secondary transparent button style. */
-.btn.ghost {
-  background: transparent;
-}
-
-.btn.ghost:hover {
-  background: var(--red-soft);
-}
-
-.hero-actions {
+/* Scope: .fresh-header. Changes here affect only matching elements. */
+.fresh-header {
+  /* Set positioning behavior; sticky keeps navigation visible while scrolling. */
+  position: sticky;
+  /* Set distance from the top; sticky uses this as its sticking point. */
+  top: var(--nav-top);
+  /* Set stacking order; larger values appear above smaller values. */
+  z-index: 100;
+  /* Select this element’s layout mode or hide it at this breakpoint. */
   display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-
-/* ===== HERO IMAGE STACK ===== */
-.hero-media {
-  position: relative;
-  min-height: 470px;
-}
-
-/*
-  Generic image placeholder.
-  Replace a placeholder div with an img element when you have a real image.
-*/
-.placeholder-image {
-  position: relative;
-  min-height: 260px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent 34%),
-    repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 20px),
-    linear-gradient(135deg, #171c24, #0d1015);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-/* Dashed inner border inside every placeholder. */
-.placeholder-image::before {
-  content: "";
-  position: absolute;
-  inset: 14px;
-  border: 1px dashed rgba(255, 255, 255, 0.18);
-  border-radius: 4px;
-}
-
-/* Displays the HTML data-label value inside the placeholder. */
-.placeholder-image::after {
-  content: attr(data-label);
-  position: absolute;
-  left: 28px;
-  bottom: 24px;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* Makes the first hero placeholder large and right-aligned. */
-.hero-media .placeholder-image:first-child {
-  min-height: 350px;
-  width: 76%;
-  margin-left: auto;
-}
-
-/* Overlaps the second placeholder at the lower left. */
-.hero-media .placeholder-image:nth-child(2) {
-  position: absolute;
-  left: 0;
-  bottom: 28px;
-  width: 54%;
-  min-height: 190px;
-  border-color: rgba(216, 31, 42, 0.56);
-}
-
-/* Overlay text card positioned at the lower right. */
-.caption-card {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: min(264px, 74%);
-  padding: 18px;
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--red);
-  background: rgba(20, 23, 29, 0.94);
-  border-radius: 0 var(--radius) var(--radius) 0;
-  box-shadow: var(--shadow);
-}
-
-.caption-card strong {
-  display: block;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.18rem;
-  line-height: 1.12;
-}
-
-.caption-card span {
-  color: var(--muted);
-  font-size: 0.88rem;
-}
-
-/* ===== STANDARD PAGE SECTIONS ===== */
-.section {
-  padding: clamp(68px, 8vw, 108px) 22px;
-}
-
-.section-inner {
-  max-width: var(--max);
-  margin: 0 auto;
-}
-
-/* Two-column title/description arrangement. */
-.split-heading {
-  display: grid;
-  grid-template-columns: 0.82fr 1.18fr;
-  gap: clamp(28px, 5vw, 68px);
-  align-items: end;
-  margin-bottom: clamp(36px, 5vw, 62px);
-}
-
-/*
-  Shared section heading style.
-  CHANGE font-size here to resize section titles on multiple pages.
-*/
-.split-heading h2,
-.feature-copy h2,
-.feature-copy h3,
-.cta-band h2 {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.2rem, 4.6vw, 4.4rem);
-  line-height: 0.98;
-  letter-spacing: -0.025em;
-}
-
-/* Shared muted paragraph/link color. */
-.split-heading p,
-.feature-copy p,
-.mini-card p,
-.contact-card p,
-.footer-grid p,
-.footer-grid a {
-  color: var(--muted);
-}
-
-/* ===== ALTERNATING FEATURE ROWS ===== */
-.feature-row {
-  padding: clamp(38px, 5vw, 74px) 0;
-  border-top: 1px solid var(--line);
-}
-
-/* Swaps text and image position when the HTML includes "reverse". */
-.feature-row.reverse .feature-copy {
-  order: 2;
-}
-
-.feature-row.reverse .feature-media {
-  order: 1;
-}
-
-/* ===== CUSTOM PROJECT DETAIL LIST ===== */
-.meta-list {
-  display: grid;
-  gap: 12px;
-  margin: 22px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.meta-list li {
-  display: flex;
-  gap: 12px;
-  color: var(--muted);
-}
-
-/* Creates a red square instead of a standard list bullet. */
-.meta-list li::before {
-  content: "";
-  flex: 0 0 auto;
-  width: 9px;
-  height: 9px;
-  margin-top: 8px;
-  background: var(--red);
-}
-
-/* ===== CARD GRID ===== */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* Align children across the grid/flex cross axis. */
+  align-items: center;
+  /* Distribute children along the main axis. */
+  justify-content: space-between;
+  /* EDIT: Adjust the space between grid or flex children. */
   gap: 18px;
-}
-
-.mini-card,
-.contact-card {
-  min-height: 178px;
-  padding: 22px;
+  /* EDIT: Adjust this element’s width. */
+  width: fit-content;
+  /* Limit width while allowing smaller screens to shrink. */
+  max-width: calc(100% - 36px);
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 20px auto 0;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 9px 14px;
+  /* Set line thickness, style, and color. */
   border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
-  border-radius: var(--radius);
-  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 40px;
+  /* Set this element’s fill or gradient. */
+  background: var(--bg);
+  /* Set the shadow; remove it for a completely flat appearance. */
+  box-shadow: 0 6px 28px #0003;
 }
 
-.mini-card:hover,
-.contact-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(216, 31, 42, 0.62);
-  background: linear-gradient(180deg, rgba(216, 31, 42, 0.14), rgba(255, 255, 255, 0.015));
+/* Scope: .brand. Changes here affect only matching elements. */
+.brand {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: flex;
+  /* Align children across the grid/flex cross axis. */
+  align-items: center;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 10px;
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 11px;
+  /* EDIT: Adjust text weight; 400 is regular and 600 is semibold. */
+  font-weight: 600;
+  /* Control whether inline text can wrap. */
+  white-space: nowrap;
 }
 
-.mini-card h3,
-.contact-card h2 {
-  margin: 0 0 12px;
-  font-family: Georgia, "Times New Roman", serif;
-
-  /* CHANGE THIS to resize headings inside cards. */
-  font-size: 1.4rem;
-
-  line-height: 1.1;
-}
-
-/* Alternate full-width section background. */
-.band {
-  background:
-    linear-gradient(90deg, rgba(199, 43, 54, 0.12), transparent 44%),
-    var(--panel);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-/* ===== CONTACT PAGE SUPPORT ===== */
-.contact-grid {
-  grid-template-columns: 0.9fr 1.1fr;
-}
-
-.contact-links {
+/* Scope: .mark. Changes here affect only matching elements. */
+.mark {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
   display: grid;
-  gap: 16px;
+  /* Center or align grid children on both axes. */
+  place-items: center;
+  /* EDIT: Adjust this element’s width. */
+  width: 27px;
+  /* EDIT: Adjust this element’s height. */
+  height: 27px;
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 50%;
+  /* Set this element’s fill or gradient. */
+  background: var(--hover);
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--accent);
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 10px;
+  /* EDIT: Adjust text weight; 400 is regular and 600 is semibold. */
+  font-weight: 700;
 }
 
-.contact-card a {
-  color: var(--white);
-  font-weight: 900;
+/* Scope: nav. Changes here affect only matching elements. */
+nav {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: flex;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 3px;
 }
 
-/* ===== FOOTER ===== */
-.site-footer {
-  padding: 54px 22px;
-  border-top: 1px solid var(--line);
-  background: #050608;
+/* Scope: nav a. Changes here affect only matching elements. */
+nav a {
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 7px 8px;
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 20px;
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 11px;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--muted);
 }
 
-.footer-grid {
-  max-width: var(--max);
+/* Scope: nav a:hover,nav a[aria-current="location"]. Changes here affect only matching elements. */
+nav a:hover,nav a[aria-current="location"] {
+  /* Set this element’s fill or gradient. */
+  background: var(--hover);
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--text);
+}
+
+/* Scope: nav a[aria-current="location"]. Changes here affect only matching elements. */
+nav a[aria-current="location"] {
+  /* EDIT: Adjust text weight; 400 is regular and 600 is semibold. */
+  font-weight: 600;
+}
+
+/* Scope: .menu. Changes here affect only matching elements. */
+.menu {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: none;
+  /* Set this element’s fill or gradient. */
+  background: none;
+  /* Set line thickness, style, and color. */
+  border: 0;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 5px;
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 11px;
+}
+
+/* Scope: #theme. Changes here affect only matching elements. */
+#theme {
+  /* Set this element’s fill or gradient. */
+  background: none;
+  /* Set line thickness, style, and color. */
+  border: 1px solid var(--line);
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 20px;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 7px 10px;
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 9px;
+  /* Control whether inline text can wrap. */
+  white-space: nowrap;
+}
+
+/* Scope: main.wrap. Changes here affect only matching elements. */
+main.wrap {
+  /* Limit width while allowing smaller screens to shrink. */
+  max-width: var(--page-width);
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr 0.8fr;
-  gap: 34px;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 0 var(--page-gutter) 10px;
 }
 
-.footer-grid h2,
-.footer-grid h3 {
-  margin: 0 0 14px;
-  font-family: Georgia, "Times New Roman", serif;
+/* Scope: .page-section. Changes here affect only matching elements. */
+.page-section {
+  /* EDIT: Adjust landing clearance when this element is an anchor target. */
+  scroll-margin-top: var(--anchor-offset);
 }
 
-.footer-links {
-  display: grid;
-  gap: 8px;
+/* Scope: .page-section:not(#home). Changes here affect only matching elements. */
+.page-section:not(#home) {
+  /* Draw only the top divider. */
+  border-top: 1px solid var(--line);
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: var(--section-space) 0;
 }
 
-/* ===== SCROLL REVEAL ANIMATION ===== */
-.scroll-reveal {
-  /* Starts hidden until script.js adds "is-visible". */
-  opacity: 0;
-  transform: translateY(34px);
-  transition: opacity 680ms ease, transform 680ms ease;
-  transition-delay: calc(var(--reveal-delay, 0) * 85ms);
+/* Scope: .opening. Changes here affect only matching elements. */
+.opening {
+  /* Set positioning behavior; sticky keeps navigation visible while scrolling. */
+  position: relative;
+  /* Keep the hero’s decorative layer behind its own content. */
+  isolation: isolate;
+  /* Align text within this element. */
+  text-align: center;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 90px 0 65px;
 }
 
-.scroll-reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+/* Scope: .opening:before. Changes here affect only matching elements. */
+.opening:before {
+  /* Create a decorative pseudo-element without an extra HTML node. */
+  content: '';
+  /* Set positioning behavior; sticky keeps navigation visible while scrolling. */
+  position: absolute;
+  /* Set all positioning offsets at once. */
+  inset: 30px 0 -30px;
+  /* Set stacking order; larger values appear above smaller values. */
+  z-index: -1;
+  /* Set this element’s fill or gradient. */
+  background: radial-gradient(ellipse at 50% 70%,var(--hover),transparent 65%);
+  /* Set transparency; 1 is fully opaque. */
+  opacity: .55;
+  /* Prevent the decorative background from intercepting clicks. */
+  pointer-events: none;
 }
 
-/* ===== GENTLE PLACEHOLDER FLOATING MOTION ===== */
-.float-soft {
-  animation: floatSoft 5.6s ease-in-out infinite;
+/* Scope: .opening h1. Changes here affect only matching elements. */
+.opening h1 {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: var(--hero-size);
+  /* EDIT: Adjust the space between lines of text. */
+  line-height: 1.1;
+  /* EDIT: Adjust the space between letters; negative values tighten headings. */
+  letter-spacing: -2.8px;
+  /* EDIT: Adjust text weight; 400 is regular and 600 is semibold. */
+  font-weight: 600;
+  /* Limit width while allowing smaller screens to shrink. */
+  max-width: 1050px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0 auto 30px;
 }
 
-@keyframes floatSoft {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-12px);
-  }
+/* Scope: .opening h1 em. Changes here affect only matching elements. */
+.opening h1 em {
+  /* Set font-style for this element. */
+  font-style: normal;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--accent);
 }
 
-/* ===== BLOG PAGE: TWO INDEPENDENT FEEDS ===== */
-.blog-feed-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-  align-items: start;
+/* Scope: .opening-copy. Changes here affect only matching elements. */
+.opening-copy {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 16px;
+  /* Limit width while allowing smaller screens to shrink. */
+  max-width: 720px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: auto;
 }
 
-/* Outer frame for each feed. */
-.blog-feed-panel {
-  min-height: 820px;
-  padding: 24px;
+/* Scope: .opening-actions. Changes here affect only matching elements. */
+.opening-actions {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: flex;
+  /* Distribute children along the main axis. */
+  justify-content: center;
+  /* Align children across the grid/flex cross axis. */
+  align-items: center;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 14px;
+  /* EDIT: Adjust space above this element only. */
+  margin-top: 32px;
+  /* Allow flex children to wrap onto another row. */
+  flex-wrap: wrap;
+}
+
+/* Scope: .primary,.secondary. Changes here affect only matching elements. */
+.primary,.secondary {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: inline-flex;
+  /* Align children across the grid/flex cross axis. */
+  align-items: center;
+  /* Distribute children along the main axis. */
+  justify-content: center;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 25px;
+  /* Set the smallest permitted width. */
+  min-width: 170px;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 12px 20px;
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 10px;
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 12px;
+  /* EDIT: Adjust text weight; 400 is regular and 600 is semibold. */
+  font-weight: 600;
+  /* Control short hover transitions; reduced-motion settings disable these. */
+  transition: transform .2s,background .2s;
+}
+
+/* Scope: .primary. Changes here affect only matching elements. */
+.primary {
+  /* Set this element’s fill or gradient. */
+  background: var(--button);
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: #fff;
+}
+
+/* Scope: .primary:hover. Changes here affect only matching elements. */
+.primary:hover {
+  /* Set this element’s fill or gradient. */
+  background: var(--button-hover);
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: #fff;
+  /* Move or rotate the element without shifting surrounding layout. */
+  transform: translateY(-3px);
+}
+
+/* Scope: .secondary. Changes here affect only matching elements. */
+.secondary {
+  /* Set line thickness, style, and color. */
   border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
-  border-radius: var(--radius);
+  /* Set this element’s fill or gradient. */
+  background: var(--panel);
 }
 
-.blog-feed-header {
-  margin-bottom: 18px;
+/* Scope: .hero-socials. Changes here affect only matching elements. */
+.hero-socials {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: flex;
+  /* Distribute children along the main axis. */
+  justify-content: center;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 25px;
+  /* EDIT: Adjust space above this element only. */
+  margin-top: 27px;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--muted);
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 12px;
 }
 
-.blog-feed-header h2 {
-  margin: 8px 0 10px;
-  font-family: Georgia, "Times New Roman", serif;
-
-  /* CHANGE THIS to resize X Feed and Medium Blog headings. */
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
-
-  line-height: 0.96;
+/* Scope: .sectionhead. Changes here affect only matching elements. */
+.sectionhead {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: flex;
+  /* Align children across the grid/flex cross axis. */
+  align-items: center;
+  /* Distribute children along the main axis. */
+  justify-content: space-between;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 20px;
+  /* EDIT: Adjust space below this element only. */
+  margin-bottom: 25px;
 }
 
-.blog-feed-header p:last-child {
+/* Scope: .sectionhead h2. Changes here affect only matching elements. */
+.sectionhead h2 {
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
   margin: 0;
-  color: var(--muted);
 }
 
-/*
-  This is what makes each feed scroll independently.
-  height sets the visible window.
-  overflow-y: auto adds a vertical scrollbar when content is taller.
-*/
-.blog-feed-scroll {
-  height: 720px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 12px;
-  scrollbar-color: var(--red) #0c0e12;
-  scrollbar-width: thin;
+/* Scope: .textlink. Changes here affect only matching elements. */
+.textlink {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 12px;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--accent);
 }
 
-/* Chrome/Safari scrollbar width. */
-.blog-feed-scroll::-webkit-scrollbar {
-  width: 10px;
+/* Scope: .workbench. Changes here affect only matching elements. */
+.workbench {
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 15px 0 20px;
+  /* EDIT: Adjust landing clearance when this element is an anchor target. */
+  scroll-margin-top: 110px;
 }
 
-.blog-feed-scroll::-webkit-scrollbar-track {
-  background: #0c0e12;
+/* Scope: .workbench h2. Changes here affect only matching elements. */
+.workbench h2 {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: var(--section-title-size);
+  /* EDIT: Adjust the space between letters; negative values tighten headings. */
+  letter-spacing: -1px;
 }
 
-.blog-feed-scroll::-webkit-scrollbar-thumb {
-  background: var(--red);
-}
-
-/* Manual Medium article card. */
-.manual-post {
-  padding: 22px;
-  margin-bottom: 16px;
+/* Scope: .showcase-toolbar. Changes here affect only matching elements. */
+.showcase-toolbar {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: flex;
+  /* Distribute children along the main axis. */
+  justify-content: space-between;
+  /* Align children across the grid/flex cross axis. */
+  align-items: center;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 15px;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 13px 20px;
+  /* Set this element’s fill or gradient. */
+  background: var(--panel);
+  /* Set line thickness, style, and color. */
   border: 1px solid var(--line);
-  background: #0c0e12;
-  border-radius: 6px;
+  /* Draw or remove only the bottom divider. */
+  border-bottom: 0;
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 13px 13px 0 0;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--muted);
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 11px;
 }
 
-.manual-post h3 {
-  margin: 0 0 10px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.35rem;
+/* Scope: .showcase-toolbar>a. Changes here affect only matching elements. */
+.showcase-toolbar>a {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 10px;
 }
 
-.manual-post p {
+/* Scope: .workbench-frame. Changes here affect only matching elements. */
+.workbench-frame {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: flex;
+  /* Choose the direction of flex children. */
+  flex-direction: column-reverse;
+  /* Set line thickness, style, and color. */
+  border: 1px solid var(--line);
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 0 0 13px 13px;
+  /* Control clipping or scrolling of content outside the box. */
+  overflow: hidden;
+  /* Set this element’s fill or gradient. */
+  background: var(--bg);
+}
+
+/* Scope: .project-picker. Changes here affect only matching elements. */
+.project-picker {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: flex;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 10px;
+  /* Draw only the top divider. */
+  border-top: 1px solid var(--line);
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 14px 22px;
+  /* Set this element’s fill or gradient. */
+  background: var(--panel);
+}
+
+/* Scope: .pick. Changes here affect only matching elements. */
+.pick {
+  /* Set positioning behavior; sticky keeps navigation visible while scrolling. */
+  position: relative;
+  /* EDIT: Adjust this element’s width. */
+  width: 100%;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 17px;
+  /* Set this element’s fill or gradient. */
+  background: transparent;
+  /* Align text within this element. */
+  text-align: left;
+  /* Set line thickness, style, and color. */
+  border: 1px solid transparent;
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 7px;
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 13px;
+}
+
+/* Scope: .pick b. Changes here affect only matching elements. */
+.pick b {
+  /* Set positioning behavior; sticky keeps navigation visible while scrolling. */
+  position: absolute;
+  /* Set horizontal positioning from the right edge. */
+  right: 12px;
+  /* EDIT: Adjust text weight; 400 is regular and 600 is semibold. */
+  font-weight: 400;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--accent);
+}
+
+/* Scope: .pick.active. Changes here affect only matching elements. */
+.pick.active {
+  /* Set this element’s fill or gradient. */
+  background: var(--hover);
+  /* Set border color without changing its thickness. */
+  border-color: var(--line);
+}
+
+/* Scope: .pick:hover. Changes here affect only matching elements. */
+.pick:hover {
+  /* Set this element’s fill or gradient. */
+  background: var(--hover);
+}
+
+/* Scope: .project-stage. Changes here affect only matching elements. */
+.project-stage {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: grid;
+  /* EDIT: Change column widths; 1fr means one equal share of available space. */
+  grid-template-columns: 1.1fr 1fr;
+  /* Align children across the grid/flex cross axis. */
+  align-items: center;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 60px;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 45px 70px;
+  /* Set the smallest permitted height. */
+  min-height: 280px;
+  /* Set this element’s fill or gradient. */
+  background: radial-gradient(ellipse at 25% 50%,var(--hover),transparent 65%);
+}
+
+/* Scope: .stage-graphic. Changes here affect only matching elements. */
+.stage-graphic {
+  /* Set positioning behavior; sticky keeps navigation visible while scrolling. */
+  position: relative;
+  /* EDIT: Adjust this element’s height. */
+  height: 220px;
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: grid;
+  /* Center or align grid children on both axes. */
+  place-items: center;
+}
+
+/* Scope: .stage-graphic span. Changes here affect only matching elements. */
+.stage-graphic span {
+  /* Set positioning behavior; sticky keeps navigation visible while scrolling. */
+  position: relative;
+  /* Set stacking order; larger values appear above smaller values. */
+  z-index: 1;
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 60px;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--accent);
+  /* EDIT: Adjust the space between letters; negative values tighten headings. */
+  letter-spacing: -2px;
+}
+
+/* Scope: .stage-graphic i. Changes here affect only matching elements. */
+.stage-graphic i {
+  /* Set positioning behavior; sticky keeps navigation visible while scrolling. */
+  position: absolute;
+  /* EDIT: Adjust this element’s width. */
+  width: 200px;
+  /* EDIT: Adjust this element’s height. */
+  height: 150px;
+  /* Set line thickness, style, and color. */
+  border: 1px solid var(--accent);
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 12px;
+  /* Move or rotate the element without shifting surrounding layout. */
+  transform: rotate(-8deg);
+  /* Set transparency; 1 is fully opaque. */
+  opacity: .3;
+}
+
+/* Scope: .stage-graphic i:last-child. Changes here affect only matching elements. */
+.stage-graphic i:last-child {
+  /* EDIT: Adjust this element’s width. */
+  width: 210px;
+  /* EDIT: Adjust this element’s height. */
+  height: 155px;
+  /* Move or rotate the element without shifting surrounding layout. */
+  transform: rotate(7deg);
+}
+
+/* Scope: .stage-copy h3. Changes here affect only matching elements. */
+.stage-copy h3 {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 26px;
+  /* EDIT: Adjust the space between letters; negative values tighten headings. */
+  letter-spacing: -.6px;
+}
+
+/* Scope: .stage-copy p. Changes here affect only matching elements. */
+.stage-copy p {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 14px;
+}
+
+/* Scope: .page-intro. Changes here affect only matching elements. */
+.page-intro {
+  /* Limit width while allowing smaller screens to shrink. */
+  max-width: 740px;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 0;
+  /* EDIT: Adjust space below this element only. */
+  margin-bottom: 30px;
+}
+
+/* Scope: .page-intro .section-title. Changes here affect only matching elements. */
+.page-intro .section-title {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: var(--section-title-size);
+  /* EDIT: Adjust the space between lines of text. */
+  line-height: 1.2;
+  /* EDIT: Adjust the space between letters; negative values tighten headings. */
+  letter-spacing: -1px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0 0 13px;
+}
+
+/* Scope: .page-intro>p:last-child. Changes here affect only matching elements. */
+.page-intro>p:last-child {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 15px;
+  /* Limit width while allowing smaller screens to shrink. */
+  max-width: 650px;
+  /* EDIT: Adjust space below this element only. */
+  margin-bottom: 0;
+}
+
+/* Scope: .content-band. Changes here affect only matching elements. */
+.content-band {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: block;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 25px 0;
+}
+
+/* Scope: .content-band h3. Changes here affect only matching elements. */
+.content-band h3 {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 20px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0 0 16px;
+}
+
+/* Scope: .draft. Changes here affect only matching elements. */
+.draft {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 14px;
+}
+
+/* Scope: .about-overview. Changes here affect only matching elements. */
+.about-overview {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: grid;
+  /* EDIT: Change column widths; 1fr means one equal share of available space. */
+  grid-template-columns: 170px 1fr;
+  /* Align children across the grid/flex cross axis. */
+  align-items: center;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 32px;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 8px 0 25px;
+  /* Limit width while allowing smaller screens to shrink. */
+  max-width: 850px;
+}
+
+/* Scope: .about-overview p. Changes here affect only matching elements. */
+.about-overview p {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 15px;
+}
+
+/* Scope: .portrait. Changes here affect only matching elements. */
+.portrait {
+  /* Set positioning behavior; sticky keeps navigation visible while scrolling. */
+  position: relative;
+  /* EDIT: Adjust this element’s width. */
+  width: 170px;
+  /* EDIT: Adjust this element’s height. */
+  height: 200px;
+  /* Prevent this item from shrinking in a flex row. */
+  flex-shrink: 0;
+  /* Set this element’s fill or gradient. */
+  background: var(--panel);
+  /* Set line thickness, style, and color. */
+  border: 1px solid var(--line);
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 12px;
+  /* Control clipping or scrolling of content outside the box. */
+  overflow: hidden;
+}
+
+/* Scope: .portrait:before. Changes here affect only matching elements. */
+.portrait:before {
+  /* Create a decorative pseudo-element without an extra HTML node. */
+  content: '';
+  /* Set positioning behavior; sticky keeps navigation visible while scrolling. */
+  position: absolute;
+  /* Set distance from the top; sticky uses this as its sticking point. */
+  top: 35px;
+  /* Set horizontal positioning from the left edge. */
+  left: 58px;
+  /* EDIT: Adjust this element’s width. */
+  width: 55px;
+  /* EDIT: Adjust this element’s height. */
+  height: 55px;
+  /* Set this element’s fill or gradient. */
+  background: #7e6b74;
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 50%;
+}
+
+/* Scope: .portrait:after. Changes here affect only matching elements. */
+.portrait:after {
+  /* Create a decorative pseudo-element without an extra HTML node. */
+  content: '';
+  /* Set positioning behavior; sticky keeps navigation visible while scrolling. */
+  position: absolute;
+  /* Set distance from the top; sticky uses this as its sticking point. */
+  top: 105px;
+  /* Set horizontal positioning from the left edge. */
+  left: 23px;
+  /* EDIT: Adjust this element’s width. */
+  width: 124px;
+  /* EDIT: Adjust this element’s height. */
+  height: 110px;
+  /* Set this element’s fill or gradient. */
+  background: #7e6b74;
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 65px 65px 0 0;
+}
+
+/* Scope: .portrait span. Changes here affect only matching elements. */
+.portrait span {
+  /* Set positioning behavior; sticky keeps navigation visible while scrolling. */
+  position: absolute;
+  /* Set distance from the bottom edge. */
+  bottom: 8px;
+  /* Set horizontal positioning from the left edge. */
+  left: 0;
+  /* EDIT: Adjust this element’s width. */
+  width: 100%;
+  /* Align text within this element. */
+  text-align: center;
+  /* Set stacking order; larger values appear above smaller values. */
+  z-index: 1;
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 10px;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: #fff;
+}
+
+/* Scope: img.portrait. Changes here affect only matching elements. */
+img.portrait {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: block;
+  /* Crop a real portrait image to fill its frame without distortion. */
+  object-fit: cover;
+  /* EDIT: Adjust the portrait crop position, for example center top. */
+  object-position: center;
+}
+
+/* Scope: .stacked. Changes here affect only matching elements. */
+.stacked {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: grid;
+  /* EDIT: Change column widths; 1fr means one equal share of available space. */
+  grid-template-columns: 1fr 1fr;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 30px;
+}
+
+/* Scope: .stacked article h3. Changes here affect only matching elements. */
+.stacked article h3 {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 17px;
+  /* EDIT: Adjust space below this element only. */
+  margin-bottom: 10px;
+}
+
+/* Scope: .stacked article p. Changes here affect only matching elements. */
+.stacked article p {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 14px;
+}
+
+/* Scope: .interest-list. Changes here affect only matching elements. */
+.interest-list {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: grid;
+  /* EDIT: Change column widths; 1fr means one equal share of available space. */
+  grid-template-columns: repeat(3,1fr);
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 25px;
+}
+
+/* Scope: .interest-list article h3. Changes here affect only matching elements. */
+.interest-list article h3 {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 17px;
+  /* EDIT: Adjust space below this element only. */
+  margin-bottom: 10px;
+}
+
+/* Scope: .interest-list article p. Changes here affect only matching elements. */
+.interest-list article p {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 14px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0;
+}
+
+/* Scope: .case. Changes here affect only matching elements. */
+.case {
+  /* EDIT: Adjust landing clearance when this element is an anchor target. */
+  scroll-margin-top: 120px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0 0 22px;
+  /* Set line thickness, style, and color. */
+  border: 1px solid var(--line);
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 8px;
+  /* Control clipping or scrolling of content outside the box. */
+  overflow: hidden;
+  /* Set this element’s fill or gradient. */
+  background: var(--bg);
+}
+
+/* Scope: .case-top. Changes here affect only matching elements. */
+.case-top {
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 25px 28px;
+}
+
+/* Scope: .case-top h3. Changes here affect only matching elements. */
+.case-top h3 {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 22px;
+  /* EDIT: Adjust space below this element only. */
+  margin-bottom: 12px;
+}
+
+/* Scope: .case-top p. Changes here affect only matching elements. */
+.case-top p {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 14px;
+  /* Limit width while allowing smaller screens to shrink. */
+  max-width: 780px;
+}
+
+/* Scope: .chips. Changes here affect only matching elements. */
+.chips {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: flex;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 6px;
+  /* Allow flex children to wrap onto another row. */
+  flex-wrap: wrap;
+}
+
+/* Scope: .chips span. Changes here affect only matching elements. */
+.chips span {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 11px;
+  /* Set this element’s fill or gradient. */
+  background: var(--hover);
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 3px 9px;
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 4px;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
   color: var(--muted);
 }
 
-/* ===== TABLET AND MOBILE: 900PX OR LESS ===== */
-@media (max-width: 900px) {
-  /* Show the mobile menu button. */
-  .nav-toggle {
-    display: block;
-  }
-
-  /* Change nav links from a desktop row to a hidden dropdown. */
-  .site-nav {
-    position: absolute;
-    top: 68px;
-    left: 0;
-    right: 0;
-    display: grid;
-    gap: 0;
-    padding: 10px 22px 22px;
-    background: rgba(8, 9, 11, 0.98);
-    border-bottom: 1px solid var(--line);
-    transform: translateY(-14px);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 220ms ease, transform 220ms ease;
-  }
-
-  /* JavaScript adds is-open when the mobile button is clicked. */
-  .site-nav.is-open {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .site-nav a {
-    padding: 14px 0;
-  }
-
-  /* Stack all major two-column layouts into one column. */
-  .hero-grid,
-  .feature-row,
-  .contact-grid,
-  .cta-band,
-  .split-heading,
-  .footer-grid,
-  .blog-feed-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* Remove alternating order because everything is stacked. */
-  .feature-row.reverse .feature-copy,
-  .feature-row.reverse .feature-media {
-    order: initial;
-  }
-
-  .card-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-media {
-    min-height: 390px;
-  }
-
-  .blog-feed-panel {
-    min-height: auto;
-  }
-
-  .blog-feed-scroll {
-    height: 620px;
-  }
+/* Scope: .case-details. Changes here affect only matching elements. */
+.case-details {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: grid;
+  /* EDIT: Change column widths; 1fr means one equal share of available space. */
+  grid-template-columns: 1fr 1fr;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 35px;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 22px 28px;
+  /* Set this element’s fill or gradient. */
+  background: var(--panel);
+  /* Draw only the top divider. */
+  border-top: 1px solid var(--line);
 }
 
-/* ===== SMALL PHONES: 620PX OR LESS ===== */
-@media (max-width: 620px) {
-  /* Hide full name in the header, leaving the AW logo. */
-  .brand span:last-child {
+/* Scope: .case-details h4. Changes here affect only matching elements. */
+.case-details h4 {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 14px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0 0 10px;
+  /* EDIT: Adjust the space between letters; negative values tighten headings. */
+  letter-spacing: 0;
+}
+
+/* Scope: .case-details p. Changes here affect only matching elements. */
+.case-details p {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 14px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0;
+}
+
+/* Scope: .notebook. Changes here affect only matching elements. */
+.notebook {
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 24px 28px;
+  /* EDIT: Adjust space below this element only. */
+  margin-bottom: 18px;
+  /* Set this element’s fill or gradient. */
+  background: var(--bg);
+  /* Set line thickness, style, and color. */
+  border: 1px solid var(--line);
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 10px;
+}
+
+/* Scope: .notebook h3. Changes here affect only matching elements. */
+.notebook h3 {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 21px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0 0 10px;
+}
+
+/* Scope: .notebook>p. Changes here affect only matching elements. */
+.notebook>p {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 14px;
+}
+
+/* Scope: details. Changes here affect only matching elements. */
+details {
+  /* Set line thickness, style, and color. */
+  border: 1px solid var(--line);
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 5px;
+  /* EDIT: Adjust space above this element only. */
+  margin-top: 15px;
+}
+
+/* Scope: summary. Changes here affect only matching elements. */
+summary {
+  /* Show the pointer for an interactive control. */
+  cursor: pointer;
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 13px;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 10px 14px;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--accent);
+}
+
+/* Scope: dl. Changes here affect only matching elements. */
+dl {
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 0 18px 12px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 10px 0 0;
+}
+
+/* Scope: dt. Changes here affect only matching elements. */
+dt {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 12px;
+  /* EDIT: Adjust text weight; 400 is regular and 600 is semibold. */
+  font-weight: 600;
+  /* EDIT: Adjust space above this element only. */
+  margin-top: 13px;
+}
+
+/* Scope: dd. Changes here affect only matching elements. */
+dd {
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 4px 0 0;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--muted);
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 12px;
+}
+
+/* Scope: .year-group. Changes here affect only matching elements. */
+.year-group {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: grid;
+  /* EDIT: Change column widths; 1fr means one equal share of available space. */
+  grid-template-columns: 100px 1fr;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 28px;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 25px 0;
+}
+
+/* Scope: .year-group>h3. Changes here affect only matching elements. */
+.year-group>h3 {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 22px;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--muted);
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0;
+}
+
+/* Scope: .milestone. Changes here affect only matching elements. */
+.milestone {
+  /* Set border-left for this element. */
+  border-left: 2px solid var(--line);
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 0 0 35px 30px;
+}
+
+/* Scope: .milestone-date. Changes here affect only matching elements. */
+.milestone-date {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 12px;
+  /* EDIT: Adjust space below this element only. */
+  margin-bottom: 12px;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--muted);
+}
+
+/* Scope: .milestone-date span. Changes here affect only matching elements. */
+.milestone-date span {
+  /* Set outside space on the left; auto consumes remaining room. */
+  margin-left: 15px;
+}
+
+/* Scope: .milestone h3. Changes here affect only matching elements. */
+.milestone h3 {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 20px;
+  /* EDIT: Adjust space below this element only. */
+  margin-bottom: 10px;
+}
+
+/* Scope: .milestone p. Changes here affect only matching elements. */
+.milestone p {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 14px;
+}
+
+/* Scope: .writing-feature. Changes here affect only matching elements. */
+.writing-feature {
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 26px 28px;
+  /* EDIT: Adjust space below this element only. */
+  margin-bottom: 8px;
+  /* Set this element’s fill or gradient. */
+  background: var(--panel);
+  /* Set line thickness, style, and color. */
+  border: 1px solid var(--line);
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 8px;
+}
+
+/* Scope: .writing-feature h3. Changes here affect only matching elements. */
+.writing-feature h3 {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 22px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0 0 12px;
+}
+
+/* Scope: .writing-feature p. Changes here affect only matching elements. */
+.writing-feature p {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 14px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0;
+}
+
+/* Scope: .article-list. Changes here affect only matching elements. */
+.article-list {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: grid;
+  /* EDIT: Change column widths; 1fr means one equal share of available space. */
+  grid-template-columns: 1fr 1fr;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 30px;
+}
+
+/* Scope: .article-list h3. Changes here affect only matching elements. */
+.article-list h3 {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 18px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 0 0 12px;
+}
+
+/* Scope: .article-list p. Changes here affect only matching elements. */
+.article-list p {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 14px;
+}
+
+/* Scope: .contact-grid. Changes here affect only matching elements. */
+.contact-grid {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: grid;
+  /* EDIT: Change column widths; 1fr means one equal share of available space. */
+  grid-template-columns: 1fr 1fr;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 16px;
+  /* EDIT: Adjust space below this element only. */
+  margin-bottom: 35px;
+}
+
+/* Scope: .route-card. Changes here affect only matching elements. */
+.route-card {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: flex;
+  /* Choose the direction of flex children. */
+  flex-direction: column;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 26px 28px;
+  /* Set line thickness, style, and color. */
+  border: 1px solid var(--line);
+  /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+  border-radius: 12px;
+  /* Set this element’s fill or gradient. */
+  background: var(--panel);
+  /* Control short hover transitions; reduced-motion settings disable these. */
+  transition: border-color .2s,transform .2s;
+}
+
+/* Scope: .route-card:hover. Changes here affect only matching elements. */
+.route-card:hover {
+  /* Set border color without changing its thickness. */
+  border-color: var(--accent);
+  /* Move or rotate the element without shifting surrounding layout. */
+  transform: translateY(-2px);
+}
+
+/* Scope: .route-card h3. Changes here affect only matching elements. */
+.route-card h3 {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: flex;
+  /* Distribute children along the main axis. */
+  justify-content: space-between;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 15px;
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 22px;
+}
+
+/* Scope: .route-card h3 span. Changes here affect only matching elements. */
+.route-card h3 span {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 14px;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--muted);
+}
+
+/* Scope: .route-card p. Changes here affect only matching elements. */
+.route-card p {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 14px;
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: 10px 0 22px;
+}
+
+/* Scope: .card-link. Changes here affect only matching elements. */
+.card-link {
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 11px;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--accent);
+  /* EDIT: Adjust space above this element only. */
+  margin-top: auto;
+}
+
+/* Scope: footer. Changes here affect only matching elements. */
+footer {
+  /* EDIT: Adjust space above this element only. */
+  margin-top: 15px;
+  /* Draw only the top divider. */
+  border-top: 1px solid var(--line);
+  /* Set this element’s fill or gradient. */
+  background: var(--bg);
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 24px 0;
+  /* EDIT: Adjust this number to change text size only for this selector. */
+  font-size: 9px;
+  /* Set text/icon color; use the theme variables to preserve light/dark behavior. */
+  color: var(--muted);
+}
+
+/* Scope: footer .wrap. Changes here affect only matching elements. */
+footer .wrap {
+  /* Select this element’s layout mode or hide it at this breakpoint. */
+  display: flex;
+  /* Distribute children along the main axis. */
+  justify-content: space-between;
+  /* EDIT: Adjust the space between grid or flex children. */
+  gap: 15px;
+  /* Limit width while allowing smaller screens to shrink. */
+  max-width: var(--page-width);
+  /* EDIT: Adjust outside spacing; values follow top, right, bottom, left (two values mean vertical/horizontal). */
+  margin: auto;
+  /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+  padding: 0 var(--page-gutter);
+}
+
+/* Scope: .fade. Changes here affect only matching elements. */
+.fade {
+  /* Run the entry animation; reduced-motion settings disable it. */
+  animation: fade .3s ease-out;
+}
+
+/* Animation steps for the gentle entry effect */
+@keyframes fade {
+  /* Scope: from. Changes here affect only matching elements. */
+  from {
+    /* Set transparency; 1 is fully opaque. */
+    opacity: 0;
+    /* Move or rotate the element without shifting surrounding layout. */
+    transform: translateY(5px);
+  }
+
+  /* Scope: to. Changes here affect only matching elements. */
+  to {
+    /* Set transparency; 1 is fully opaque. */
+    opacity: 1;
+    /* Move or rotate the element without shifting surrounding layout. */
+    transform: translateY(0);
+  }
+
+}
+
+/* Responsive override: applies only when (max-width:1050px) */
+@media(max-width:1050px) {
+  /* Scope: .fresh-header. Changes here affect only matching elements. */
+  .fresh-header {
+    /* EDIT: Adjust this element’s width. */
+    width: calc(100% - 40px);
+    /* EDIT: Adjust corner roundness; 50% makes a square into a circle. */
+    border-radius: 18px;
+    /* Distribute children along the main axis. */
+    justify-content: center;
+  }
+
+  /* Scope: .brand>span:last-child. Changes here affect only matching elements. */
+  .brand>span:last-child {
+    /* Select this element’s layout mode or hide it at this breakpoint. */
     display: none;
   }
 
-  .hero,
-  .section,
-  .site-footer {
-    padding-left: 16px;
-    padding-right: 16px;
+  /* Scope: .project-stage. Changes here affect only matching elements. */
+  .project-stage {
+    /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+    padding: 35px;
+    /* EDIT: Adjust the space between grid or flex children. */
+    gap: 35px;
   }
 
-  .nav-wrap {
-    padding: 0 16px;
+}
+
+/* Responsive override: applies only when (max-width:800px) */
+@media(max-width:800px) {
+  /* Scope: :root. Changes here affect only matching elements. */
+  :root {
+    /* EDIT: Text size shared by the main section headings. */
+    --section-title-size: 28px;
+    /* EDIT: Top and bottom padding of every main section except Home. */
+    --section-space: 38px;
+    /* EDIT: Sticky navigation distance from the top edge. */
+    --nav-top: 8px;
   }
 
-  /* CHANGE THIS to adjust hero title size specifically on phones. */
-  .display-title {
-    font-size: clamp(2.75rem, 14vw, 4.4rem);
+  /* Scope: .fresh-header. Changes here affect only matching elements. */
+  .fresh-header {
+    /* Distribute children along the main axis. */
+    justify-content: space-between;
+    /* Allow flex children to wrap onto another row. */
+    flex-wrap: wrap;
   }
 
-  /* Stack hero visuals instead of overlapping them. */
-  .hero-media {
-    display: grid;
-    gap: 16px;
-    min-height: 0;
+  /* Scope: .brand>span:last-child. Changes here affect only matching elements. */
+  .brand>span:last-child {
+    /* Select this element’s layout mode or hide it at this breakpoint. */
+    display: block;
   }
 
-  .hero-media .placeholder-image:first-child,
-  .hero-media .placeholder-image:nth-child(2),
-  .caption-card {
-    position: relative;
-    width: 100%;
-    inset: auto;
-    margin: 0;
-  }
-}
-
-/* ===== ACCESSIBILITY: REDUCED MOTION ===== */
-@media (prefers-reduced-motion: reduce) {
-  /*
-    Visitors who request reduced motion receive nearly instant animations.
-  */
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  /* Scope: .menu. Changes here affect only matching elements. */
+  .menu {
+    /* Select this element’s layout mode or hide it at this breakpoint. */
+    display: block;
+    /* Set outside space on the left; auto consumes remaining room. */
+    margin-left: auto;
   }
 
-  /* Content remains visible even though motion is disabled. */
-  body,
-  .scroll-reveal {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* ===== 2026 EDITORIAL REDESIGN =====
-   A broader professional palette and a more structured, asymmetric layout. */
-:root {
-  --bg: #080b12;
-  --panel: #101722;
-  --panel-strong: #172233;
-  --text: #edf1f5;
-  --muted: #9eabba;
-  --line: rgba(156, 176, 199, 0.16);
-  --red: #c94b57;
-  --red-soft: rgba(201, 75, 87, 0.12);
-  --blue: #6f91b7;
-  --blue-soft: rgba(111, 145, 183, 0.12);
-  --gold: #c5a46d;
-  --gold-soft: rgba(197, 164, 109, 0.12);
-  --max: 1160px;
-  --shadow: 0 24px 60px rgba(2, 5, 10, 0.38);
-}
-
-body {
-  background:
-    radial-gradient(circle at 86% 8%, rgba(111, 145, 183, 0.13), transparent 26%),
-    radial-gradient(circle at 8% 42%, rgba(201, 75, 87, 0.07), transparent 22%),
-    linear-gradient(135deg, #080b12 0%, #0c121c 50%, #090d15 100%);
-}
-
-.site-header {
-  border-bottom-color: rgba(156, 176, 199, 0.14);
-  background: rgba(8, 12, 19, 0.9);
-}
-
-.nav-wrap {
-  min-height: 72px;
-}
-
-.brand-mark {
-  color: #09101a;
-  background: linear-gradient(145deg, #d3b77f, #9d7840);
-  border: 0;
-  box-shadow: 0 8px 24px rgba(197, 164, 109, 0.18);
-}
-
-.site-nav a::after {
-  height: 1px;
-  background: var(--gold);
-}
-
-.hero {
-  position: relative;
-  min-height: min(780px, calc(100vh - 72px));
-  isolation: isolate;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 12%;
-  right: 0;
-  width: min(38vw, 520px);
-  height: 62%;
-  border: 1px solid rgba(111, 145, 183, 0.12);
-  border-right: 0;
-  background: linear-gradient(135deg, rgba(111, 145, 183, 0.06), transparent 62%);
-}
-
-.hero-grid {
-  grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr);
-  gap: clamp(56px, 8vw, 112px);
-}
-
-.hero-copy {
-  position: relative;
-  padding-left: clamp(22px, 3vw, 38px);
-}
-
-.hero-copy::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 4px;
-  width: 1px;
-  height: min(72%, 310px);
-  background: linear-gradient(var(--gold), rgba(197, 164, 109, 0));
-}
-
-.eyebrow {
-  color: var(--blue);
-}
-
-.eyebrow::before {
-  width: 18px;
-  height: 1px;
-  border-radius: 0;
-  background: var(--gold);
-}
-
-.display-title {
-  max-width: 760px;
-  margin-top: 22px;
-  font-family: "Segoe UI", Inter, ui-sans-serif, system-ui, sans-serif;
-  font-size: clamp(3rem, 6.2vw, 5.75rem);
-  font-weight: 650;
-  line-height: 0.98;
-  letter-spacing: -0.055em;
-}
-
-.display-title span,
-.accent {
-  color: var(--gold);
-}
-
-.lead {
-  max-width: 620px;
-}
-
-.hero-media {
-  min-height: 430px;
-  transform: translateY(24px);
-}
-
-.placeholder-image {
-  border-color: rgba(111, 145, 183, 0.2);
-  background:
-    linear-gradient(155deg, rgba(111, 145, 183, 0.16), transparent 38%),
-    repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 22px),
-    linear-gradient(135deg, #192536, #0c121c);
-}
-
-.placeholder-image::before {
-  border-color: rgba(197, 164, 109, 0.22);
-}
-
-.placeholder-image::after {
-  color: rgba(213, 224, 234, 0.7);
-}
-
-.hero-media .placeholder-image:first-child {
-  width: 88%;
-  min-height: 320px;
-}
-
-.hero-media .placeholder-image:nth-child(2) {
-  left: -7%;
-  bottom: 44px;
-  width: 50%;
-  min-height: 168px;
-  border-color: rgba(197, 164, 109, 0.42);
-}
-
-.caption-card {
-  right: -3%;
-  width: min(250px, 70%);
-  border-left-color: var(--blue);
-  background: rgba(15, 23, 34, 0.96);
-}
-
-.btn {
-  border-color: rgba(197, 164, 109, 0.42);
-  background: var(--gold);
-  color: #0a1018;
-}
-
-.btn:hover {
-  background: #d5b77e;
-}
-
-.btn.ghost {
-  color: var(--text);
-  border-color: rgba(111, 145, 183, 0.35);
-}
-
-.btn.ghost:hover {
-  background: var(--blue-soft);
-}
-
-.split-heading {
-  grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr);
-  align-items: center;
-  padding: 0 0 30px;
-  border-bottom: 1px solid var(--line);
-}
-
-.split-heading h2,
-.feature-copy h2,
-.feature-copy h3,
-.cta-band h2 {
-  font-family: "Segoe UI", Inter, ui-sans-serif, system-ui, sans-serif;
-  font-weight: 600;
-  letter-spacing: -0.045em;
-}
-
-.card-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.mini-card,
-.contact-card {
-  position: relative;
-  min-height: 154px;
-  padding: 26px 28px;
-  background: linear-gradient(145deg, rgba(111, 145, 183, 0.09), rgba(16, 23, 34, 0.76));
-  overflow: hidden;
-}
-
-.mini-card::after,
-.contact-card::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 42px;
-  height: 2px;
-  background: var(--gold);
-}
-
-.mini-card:hover,
-.contact-card:hover {
-  border-color: rgba(111, 145, 183, 0.42);
-  background: linear-gradient(145deg, rgba(111, 145, 183, 0.15), rgba(16, 23, 34, 0.84));
-}
-
-.mini-card h3,
-.contact-card h2 {
-  font-family: "Segoe UI", Inter, ui-sans-serif, system-ui, sans-serif;
-  font-weight: 600;
-}
-
-.feature-row {
-  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1.08fr);
-  margin: 24px 0;
-  padding: clamp(38px, 5vw, 60px);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: linear-gradient(120deg, rgba(111, 145, 183, 0.055), rgba(16, 23, 34, 0.3));
-}
-
-.feature-row:nth-child(even) {
-  background: linear-gradient(120deg, rgba(197, 164, 109, 0.055), rgba(16, 23, 34, 0.3));
-}
-
-.meta-list li::before {
-  width: 14px;
-  height: 1px;
-  margin-top: 12px;
-  background: var(--gold);
-}
-
-.band {
-  background:
-    linear-gradient(110deg, rgba(111, 145, 183, 0.13), transparent 44%),
-    var(--panel);
-}
-
-.cta-band {
-  grid-template-columns: 0.8fr 1.2fr;
-}
-
-.blog-feed-grid {
-  gap: 28px;
-}
-
-.blog-feed-panel {
-  background: linear-gradient(160deg, rgba(111, 145, 183, 0.09), rgba(16, 23, 34, 0.72));
-}
-
-.blog-feed-scroll {
-  scrollbar-color: var(--gold) #0c1119;
-}
-
-.blog-feed-scroll::-webkit-scrollbar-thumb {
-  background: var(--gold);
-}
-
-.site-footer {
-  background: #070a10;
-}
-
-.footer-grid {
-  grid-template-columns: 1.5fr 0.65fr 0.85fr;
-  padding-top: 8px;
-}
-
-.footer-grid h2,
-.footer-grid h3 {
-  font-family: "Segoe UI", Inter, ui-sans-serif, system-ui, sans-serif;
-  font-weight: 600;
-}
-
-.footer-links a:hover {
-  color: var(--gold);
-}
-
-@media (max-width: 900px) {
-  .site-nav {
-    top: 72px;
+  /* Scope: .fresh-header nav. Changes here affect only matching elements. */
+  .fresh-header nav {
+    /* Select this element’s layout mode or hide it at this breakpoint. */
+    display: none;
+    /* Set visual position inside the flex layout. */
+    order: 3;
+    /* Set the initial size of a flex item. */
+    flex-basis: 100%;
+    /* Distribute children along the main axis. */
+    justify-content: center;
+    /* Allow flex children to wrap onto another row. */
+    flex-wrap: wrap;
   }
 
-  .hero-grid,
-  .feature-row,
-  .contact-grid,
-  .cta-band,
-  .split-heading,
-  .footer-grid,
-  .blog-feed-grid {
-    grid-template-columns: 1fr;
+  /* Scope: .fresh-header nav.open. Changes here affect only matching elements. */
+  .fresh-header nav.open {
+    /* Select this element’s layout mode or hide it at this breakpoint. */
+    display: flex;
+    /* Limit height so overflowing content can scroll. */
+    max-height: 60vh;
+    /* Control clipping or scrolling of content outside the box. */
+    overflow: auto;
   }
 
-  .hero-copy {
-    padding-left: 24px;
+  /* Scope: .opening. Changes here affect only matching elements. */
+  .opening {
+    /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+    padding: 65px 0 45px;
   }
 
-  .hero-media {
-    transform: none;
+  /* Scope: .opening h1. Changes here affect only matching elements. */
+  .opening h1 {
+    /* EDIT: Adjust this number to change text size only for this selector. */
+    font-size: 44px;
+    /* EDIT: Adjust the space between letters; negative values tighten headings. */
+    letter-spacing: -1.8px;
   }
 
-  .feature-row {
+  /* Scope: .opening-copy. Changes here affect only matching elements. */
+  .opening-copy {
+    /* EDIT: Adjust this number to change text size only for this selector. */
+    font-size: 15px;
+  }
+
+  /* Scope: .opening-copy br. Changes here affect only matching elements. */
+  .opening-copy br {
+    /* Select this element’s layout mode or hide it at this breakpoint. */
+    display: none;
+  }
+
+  /* Scope: .project-stage. Changes here affect only matching elements. */
+  .project-stage {
+    /* EDIT: Change column widths; 1fr means one equal share of available space. */
+    grid-template-columns: 1fr 1fr;
+    /* EDIT: Adjust the space between grid or flex children. */
+    gap: 20px;
+    /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
     padding: 30px;
   }
+
+  /* Scope: .stage-graphic i. Changes here affect only matching elements. */
+  .stage-graphic i {
+    /* EDIT: Adjust this element’s width. */
+    width: 130px;
+    /* EDIT: Adjust this element’s height. */
+    height: 130px;
+  }
+
+  /* Scope: .stage-graphic i:last-child. Changes here affect only matching elements. */
+  .stage-graphic i:last-child {
+    /* EDIT: Adjust this element’s width. */
+    width: 145px;
+    /* EDIT: Adjust this element’s height. */
+    height: 135px;
+  }
+
+  /* Scope: .stage-copy h3. Changes here affect only matching elements. */
+  .stage-copy h3 {
+    /* EDIT: Adjust this number to change text size only for this selector. */
+    font-size: 24px;
+  }
+
+  /* Scope: .content-band. Changes here affect only matching elements. */
+  .content-band {
+    /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+    padding: 20px 0;
+  }
+
+  /* Scope: .about-overview. Changes here affect only matching elements. */
+  .about-overview {
+    /* EDIT: Change column widths; 1fr means one equal share of available space. */
+    grid-template-columns: 130px 1fr;
+    /* EDIT: Adjust the space between grid or flex children. */
+    gap: 22px;
+  }
+
+  /* Scope: .portrait. Changes here affect only matching elements. */
+  .portrait {
+    /* EDIT: Adjust this element’s width. */
+    width: 130px;
+    /* EDIT: Adjust this element’s height. */
+    height: 170px;
+  }
+
+  /* Scope: .portrait:before. Changes here affect only matching elements. */
+  .portrait:before {
+    /* Set horizontal positioning from the left edge. */
+    left: 38px;
+  }
+
+  /* Scope: .portrait:after. Changes here affect only matching elements. */
+  .portrait:after {
+    /* Set horizontal positioning from the left edge. */
+    left: 3px;
+  }
+
+  /* Scope: .interest-list. Changes here affect only matching elements. */
+  .interest-list {
+    /* EDIT: Change column widths; 1fr means one equal share of available space. */
+    grid-template-columns: 1fr;
+    /* EDIT: Adjust the space between grid or flex children. */
+    gap: 20px;
+  }
+
+  /* Scope: .case-top,.case-details,.notebook. Changes here affect only matching elements. */
+  .case-top,.case-details,.notebook {
+    /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+    padding: 22px;
+  }
+
+  /* Scope: .year-group. Changes here affect only matching elements. */
+  .year-group {
+    /* EDIT: Change column widths; 1fr means one equal share of available space. */
+    grid-template-columns: 70px 1fr;
+    /* EDIT: Adjust the space between grid or flex children. */
+    gap: 18px;
+  }
+
+  /* Scope: footer .wrap. Changes here affect only matching elements. */
+  footer .wrap {
+    /* Choose the direction of flex children. */
+    flex-direction: column;
+    /* EDIT: Adjust the space between grid or flex children. */
+    gap: 4px;
+  }
+
 }
 
-@media (max-width: 620px) {
-  .card-grid {
+/* Responsive override: applies only when (max-width:550px) */
+@media(max-width:550px) {
+  /* Scope: .about-overview. Changes here affect only matching elements. */
+  .about-overview {
+    /* EDIT: Change column widths; 1fr means one equal share of available space. */
     grid-template-columns: 1fr;
   }
 
-  .hero::before {
-    width: 70vw;
+  /* Scope: .portrait. Changes here affect only matching elements. */
+  .portrait {
+    /* EDIT: Adjust this element’s width. */
+    width: 150px;
+    /* EDIT: Adjust this element’s height. */
+    height: 180px;
   }
 
-  .hero-copy {
-    padding-left: 18px;
+  /* Scope: .portrait:before. Changes here affect only matching elements. */
+  .portrait:before {
+    /* Set horizontal positioning from the left edge. */
+    left: 48px;
   }
 
-  .hero-media .placeholder-image:nth-child(2) {
-    left: auto;
+  /* Scope: .portrait:after. Changes here affect only matching elements. */
+  .portrait:after {
+    /* Set horizontal positioning from the left edge. */
+    left: 13px;
   }
 
-  .feature-row {
-    margin: 14px 0;
-    padding: 24px 20px;
+  /* Scope: .stacked,.article-list,.case-details,.contact-grid. Changes here affect only matching elements. */
+  .stacked,.article-list,.case-details,.contact-grid {
+    /* EDIT: Change column widths; 1fr means one equal share of available space. */
+    grid-template-columns: 1fr;
+    /* EDIT: Adjust the space between grid or flex children. */
+    gap: 24px;
   }
+
+  /* Scope: .year-group. Changes here affect only matching elements. */
+  .year-group {
+    /* EDIT: Change column widths; 1fr means one equal share of available space. */
+    grid-template-columns: 1fr;
+    /* EDIT: Adjust the space between grid or flex children. */
+    gap: 15px;
+  }
+
+  /* Scope: .opening. Changes here affect only matching elements. */
+  .opening {
+    /* EDIT: Adjust inside space above the content only. */
+    padding-top: 60px;
+  }
+
+}
+
+/* Responsive override: applies only when (max-width:480px) */
+@media(max-width:480px) {
+  /* Scope: :root. Changes here affect only matching elements. */
+  :root {
+    /* EDIT: Space between content and the left/right edges. */
+    --page-gutter: 23px;
+  }
+
+  /* Scope: .opening h1. Changes here affect only matching elements. */
+  .opening h1 {
+    /* EDIT: Adjust this number to change text size only for this selector. */
+    font-size: 37px;
+    /* EDIT: Adjust the space between lines of text. */
+    line-height: 1.15;
+    /* EDIT: Adjust the space between letters; negative values tighten headings. */
+    letter-spacing: -1.4px;
+  }
+
+  /* Scope: .opening-actions. Changes here affect only matching elements. */
+  .opening-actions {
+    /* EDIT: Adjust the space between grid or flex children. */
+    gap: 10px;
+  }
+
+  /* Scope: .primary,.secondary. Changes here affect only matching elements. */
+  .primary,.secondary {
+    /* Set the smallest permitted width. */
+    min-width: 0;
+    /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+    padding: 12px 16px;
+  }
+
+  /* Scope: .project-stage. Changes here affect only matching elements. */
+  .project-stage {
+    /* EDIT: Change column widths; 1fr means one equal share of available space. */
+    grid-template-columns: 1fr;
+    /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+    padding: 26px;
+    /* Set the smallest permitted height. */
+    min-height: 220px;
+  }
+
+  /* Scope: .stage-graphic. Changes here affect only matching elements. */
+  .stage-graphic {
+    /* Select this element’s layout mode or hide it at this breakpoint. */
+    display: none;
+  }
+
+  /* Scope: .project-picker. Changes here affect only matching elements. */
+  .project-picker {
+    /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+    padding: 10px;
+    /* EDIT: Adjust the space between grid or flex children. */
+    gap: 5px;
+    /* Choose the direction of flex children. */
+    flex-direction: column;
+  }
+
+  /* Scope: .pick. Changes here affect only matching elements. */
+  .pick {
+    /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+    padding: 10px;
+  }
+
+  /* Scope: .showcase-toolbar. Changes here affect only matching elements. */
+  .showcase-toolbar {
+    /* EDIT: Adjust space inside this element; two values mean vertical/horizontal. */
+    padding: 12px;
+  }
+
+  /* Scope: .workbench h2. Changes here affect only matching elements. */
+  .workbench h2 {
+    /* EDIT: Adjust this number to change text size only for this selector. */
+    font-size: 28px;
+  }
+
+  /* Scope: .case-top h3. Changes here affect only matching elements. */
+  .case-top h3 {
+    /* EDIT: Adjust this number to change text size only for this selector. */
+    font-size: 22px;
+  }
+
+  /* Scope: .fresh-header. Changes here affect only matching elements. */
+  .fresh-header {
+    /* EDIT: Adjust the space between grid or flex children. */
+    gap: 10px;
+  }
+
+  /* Scope: .brand. Changes here affect only matching elements. */
+  .brand {
+    /* EDIT: Adjust this number to change text size only for this selector. */
+    font-size: 10px;
+  }
+
+}
+
+/* Responsive override: applies only when (prefers-reduced-motion:reduce) */
+@media(prefers-reduced-motion:reduce) {
+  /* Scope: *,*:before,*:after. Changes here affect only matching elements. */
+  *,*:before,*:after {
+    /* Run the entry animation; reduced-motion settings disable it. */
+    animation: none!important;
+    /* Control short hover transitions; reduced-motion settings disable these. */
+    transition: none!important;
+  }
+
 }
