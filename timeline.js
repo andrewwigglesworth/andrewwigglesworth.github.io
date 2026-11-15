@@ -1,3 +1,5 @@
+/*
+commented this out for now.
 // ISO dates sort correctly as strings. New entries may be added anywhere in the list.
 const timeline = document.querySelector('.timeline');
 if (timeline) {
@@ -17,3 +19,4 @@ if (timelineMenu) {
     }
   });
 }
+*/
