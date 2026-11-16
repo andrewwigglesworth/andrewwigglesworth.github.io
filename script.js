@@ -175,6 +175,16 @@ function updateActiveSection() {
       activeSection = section;
     }
   }
+  // Check whether the visitor has reached the bottom of the page.
+// The 4-pixel allowance handles browser rounding differences.
+const atPageBottom =
+  window.scrollY + window.innerHeight >=
+  document.documentElement.scrollHeight - 4;
+
+// Highlight the final section (Contact) when the page reaches the bottom.
+if (atPageBottom) {
+  activeSection = sections[sections.length - 1];
+}
   // Update the accessible current-location state on every navigation link.
   sectionLinks.forEach((link) => {
     // Compare the link fragment with the selected section's ID.
